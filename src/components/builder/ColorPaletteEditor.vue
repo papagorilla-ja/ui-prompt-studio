@@ -53,7 +53,7 @@ const colorItems: ColorItemDef[] = [
       <div class="d-flex align-center gap-2">
         <span class="step-badge">STEP 3</span>
         <div class="icon-box">
-          <v-icon icon="mdi-palette-outline" size="18" color="primary" />
+          <v-icon icon="mdi-palette-outline" size="16" color="primary" />
         </div>
         <h3 class="section-title">カラーパレット (Roles & Rules)</h3>
       </div>
@@ -63,11 +63,10 @@ const colorItems: ColorItemDef[] = [
     </div>
 
     <!-- Color Items -->
-    <v-card
+    <div
       v-for="item in colorItems"
       :key="item.key"
-      variant="outlined"
-      class="color-card pa-3"
+      class="color-card linear-card pa-3"
       :class="{ 'accent-border': item.isAccent }"
     >
       <div class="d-flex align-center justify-space-between mb-1">
@@ -85,7 +84,7 @@ const colorItems: ColorItemDef[] = [
         </div>
       </div>
 
-      <div class="text-caption text-grey mb-2">{{ item.desc }}</div>
+      <div class="text-caption text-grey-lighten-1 mb-2">{{ item.desc }}</div>
 
       <!-- Color preview swatch & Hex input -->
       <div class="d-flex align-center gap-2">
@@ -118,7 +117,7 @@ const colorItems: ColorItemDef[] = [
           placeholder="#HEX"
         />
       </div>
-    </v-card>
+    </div>
   </div>
 </template>
 
@@ -127,15 +126,10 @@ const colorItems: ColorItemDef[] = [
 .gap-3 { gap: 12px; }
 .font-mono { font-family: var(--font-mono); }
 
-.color-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 10px !important;
-}
-
 .accent-border {
-  border-color: rgba(244, 63, 94, 0.4) !important;
-  background: rgba(244, 63, 94, 0.04) !important;
+  border-color: rgba(244, 63, 94, 0.45) !important;
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.12) 0%, rgba(14, 16, 23, 0.7) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(244, 63, 94, 0.3), 0 0 16px rgba(244, 63, 94, 0.15) !important;
 }
 
 .color-swatch-btn {

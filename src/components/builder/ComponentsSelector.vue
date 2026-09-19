@@ -118,7 +118,7 @@ const categories: ComponentCategory[] = [
       <div class="d-flex align-center gap-2">
         <span class="step-badge">STEP 4</span>
         <div class="icon-box">
-          <v-icon icon="mdi-checkbox-multiple-marked-outline" size="18" color="primary" />
+          <v-icon icon="mdi-checkbox-multiple-marked-outline" size="16" color="primary" />
         </div>
         <h3 class="section-title">実装コンポーネントの対象</h3>
       </div>
@@ -144,11 +144,10 @@ const categories: ComponentCategory[] = [
     </div>
 
     <!-- Category Groups -->
-    <v-card
+    <div
       v-for="cat in categories"
       :key="cat.title"
-      variant="outlined"
-      class="cat-card pa-3"
+      class="cat-card linear-card pa-3"
     >
       <div class="text-body-2 font-weight-bold text-white mb-2 d-flex align-center">
         <v-icon :icon="cat.icon" size="16" class="mr-1 text-primary" />
@@ -195,7 +194,7 @@ const categories: ComponentCategory[] = [
           </div>
         </template>
       </div>
-    </v-card>
+    </div>
   </div>
 </template>
 
@@ -205,17 +204,12 @@ const categories: ComponentCategory[] = [
 .gap-3 { gap: 12px; }
 .transition-all { transition: all 0.15s ease; }
 
-.cat-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 10px !important;
-}
-
 .component-item:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
 .item-active {
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 6px;
 }
 </style>
