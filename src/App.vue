@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useConfigStore } from '@/stores/configStore'
+import { DESIGN_SYSTEMS } from '@/constants/presets'
+import type { DesignSystemType, PlatformType } from '@/types/config'
+
+const store = useConfigStore()
 
 const snackbar = ref(false)
 const snackbarText = ref('')
@@ -8,6 +13,13 @@ function showNotification(text: string) {
   snackbarText.value = text
   snackbar.value = true
 }
+
+function handleReset() {
+  store.resetToDefault()
+  showNotification('設定を初期デフォルト値にリセットしました')
+}
+
+const designSystemsList = Object.values(DESIGN_SYSTEMS)
 </script>
 
 <template>
@@ -53,7 +65,8 @@ function showNotification(text: string) {
           icon="mdi-refresh"
           variant="text"
           size="small"
-          @click="showNotification('設定リセット')"
+          title="初期値にリセット"
+          @click="handleReset"
         />
       </div>
     </header>
@@ -70,31 +83,53 @@ function showNotification(text: string) {
           <span class="text-caption text-grey">Issue #3</span>
         </div>
 
+        <!-- 0. Target Platform -->
         <v-card variant="outlined" class="mb-4 pa-3" color="rgba(255,255,255,0.06)">
           <div class="text-caption font-weight-bold text-grey-lighten-1 mb-2">
             0. ターゲットアプリ種別
           </div>
-          <v-btn-toggle mandatory density="compact" color="primary" class="w-100">
+          <v-btn-toggle
+            :model-value="store.config.platform"
+            mandatory
+            density="compact"
+            color="primary"
+            class="w-100"
+            @update:model-value="(val) => store.setPlatform(val as PlatformType)"
+          >
             <v-btn value="web" class="flex-grow-1" prepend-icon="mdi-web">Web App</v-btn>
             <v-btn value="desktop" class="flex-grow-1" prepend-icon="mdi-laptop">Desktop</v-btn>
           </v-btn-toggle>
         </v-card>
 
+        <!-- 1. Design System Selection -->
         <v-card variant="outlined" class="mb-4 pa-3" color="rgba(255,255,255,0.06)">
           <div class="text-caption font-weight-bold text-grey-lighten-1 mb-2">
             1. デザインシステム選択
           </div>
-          <v-chip-group mandatory selected-class="text-primary" column>
-            <v-chip value="bento" filter variant="outlined">Bento Grid</v-chip>
-            <v-chip value="brutalism" filter variant="outlined">タクタイル・ブルータリズム</v-chip>
-            <v-chip value="minimal" filter variant="outlined">ミニマリズム UI</v-chip>
-            <v-chip value="retrofuturistic" filter variant="outlined">レトロフューチャリズム</v-chip>
-            <v-chip value="glassmorphism" filter variant="outlined">グラスモフィズム</v-chip>
+          <v-chip-group
+            :model-value="store.config.designSystem"
+            mandatory
+            selected-class="text-primary"
+            column
+            @update:model-value="(val) => store.setDesignSystem(val as DesignSystemType)"
+          >
+            <v-chip
+              v-for="ds in designSystemsList"
+              :key="ds.id"
+              :value="ds.id"
+              filter
+              variant="outlined"
+            >
+              {{ ds.name }}
+            </v-chip>
           </v-chip-group>
+          <div class="text-caption text-grey-lighten-2 mt-2 pa-2 rounded" style="background: rgba(255,255,255,0.03);">
+            {{ store.currentDesignSystemMeta.subtitle }}
+          </div>
         </v-card>
 
         <div class="text-caption text-grey text-center py-4">
-          ※ Issue #2（ストア）および Issue #3（ビルダーUI）にて詳細コンポーネントを実装します。
+          ※ Issue #3 にてスライダー、カラーピッカー、コンポーネント選択の詳細UIを実装します。
         </div>
       </section>
 
@@ -116,14 +151,60 @@ function showNotification(text: string) {
             </div>
           </div>
 
-          <div class="flex-1 d-flex align-center justify-center pa-6">
-            <div class="text-center">
-              <v-icon icon="mdi-monitor-dashboard" size="56" color="grey-darken-2" class="mb-3" />
-              <div class="text-subtitle-1 font-weight-medium text-grey-lighten-1">
-                プレビューサンドボックス
+          <div class="flex-1 d-flex align-center justify-center pa-6 overflow-hidden">
+            <!-- Sandbox preview root applying cssVariables -->
+            <div
+              class="ui-preview-sandbox pa-6 rounded-lg d-flex flex-column align-center justify-center"
+              :style="{
+                background: store.config.colors.base,
+                border: `${store.config.rules.borderWidth}px solid ${store.config.colors.border}`,
+                borderRadius: `${store.config.rules.borderRadius}px`,
+                width: '90%',
+                maxWidth: '600px',
+                minHeight: '220px',
+                transition: 'all 0.25s ease',
+              }"
+            >
+              <!-- Desktop Titlebar Mockup if Desktop is active -->
+              <div
+                v-if="store.isDesktop"
+                class="w-100 d-flex align-center justify-space-between pb-3 mb-3 border-b"
+                style="border-color: rgba(255,255,255,0.1) !important;"
+              >
+                <div class="d-flex align-center" style="gap: 6px;">
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                  <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+                </div>
+                <span class="text-caption" :style="{ color: store.config.colors.secondaryText }">My Desktop App</span>
+                <div style="width: 40px;"></div>
               </div>
-              <div class="text-caption text-grey">
-                左ペインでの設定がリアルタイムにここにレンダリングされます (Issue #4)
+
+              <div
+                class="pa-4 rounded mb-2 text-center w-100"
+                :style="{
+                  background: store.config.colors.surface,
+                  border: `${store.config.rules.borderWidth}px solid ${store.config.colors.border}`,
+                  borderRadius: `${store.config.rules.borderRadius}px`,
+                }"
+              >
+                <div class="text-h6 font-weight-bold" :style="{ color: store.config.colors.primaryText }">
+                  {{ store.currentDesignSystemMeta.name }}
+                </div>
+                <div class="text-caption mt-1" :style="{ color: store.config.colors.secondaryText }">
+                  Gap: {{ store.config.rules.gap }}px | Radius: {{ store.config.rules.borderRadius }}px | Border: {{ store.config.rules.borderWidth }}px
+                </div>
+                <v-btn
+                  size="small"
+                  class="mt-3"
+                  :style="{
+                    background: store.config.colors.accent,
+                    color: '#ffffff',
+                    borderRadius: `${store.config.rules.borderRadius}px`,
+                  }"
+                >
+                  Accent Action (3%)
+                </v-btn>
               </div>
             </div>
           </div>
@@ -162,9 +243,10 @@ function showNotification(text: string) {
           >
             <pre style="margin: 0; color: #94a3b8; line-height: 1.5;"># UI実装指示プロンプト
 ## 1. アプリケーション概要
-- ターゲット種別: Web アプリケーション
-- デザインシステム: Bento Grid / モジュラーレイアウト
-... (Issue #5にてリアルタイムフォーマッターを実装)</pre>
+- ターゲット種別: {{ store.config.platform === 'desktop' ? 'デスクトップアプリケーション' : 'Web アプリケーション' }}
+- スタイル: {{ store.currentDesignSystemMeta.name }}
+- 基本カラー: Base={{ store.config.colors.base }}, Surface={{ store.config.colors.surface }}, Accent={{ store.config.colors.accent }}
+... (Issue #5にて完全なフォーマッターを実装)</pre>
           </v-sheet>
         </div>
       </section>
