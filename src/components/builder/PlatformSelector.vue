@@ -22,9 +22,13 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
 
 <template>
   <div class="platform-selector">
-    <div class="text-caption font-weight-bold text-grey-lighten-1 mb-2 d-flex align-center">
-      <v-icon icon="mdi-devices" size="16" class="mr-1 text-primary" />
-      0. ターゲットアプリ種別
+    <!-- Prominent Section Header -->
+    <div class="section-header gap-2 mb-3">
+      <span class="step-badge">STEP 0</span>
+      <div class="icon-box">
+        <v-icon icon="mdi-devices" size="18" color="primary" />
+      </div>
+      <h3 class="section-title">ターゲットアプリ種別</h3>
     </div>
 
     <v-row dense>
@@ -66,7 +70,7 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
 .platform-card {
   border-color: rgba(255, 255, 255, 0.08) !important;
   background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 
 .platform-card:hover {
@@ -77,7 +81,7 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
 .active-platform {
   border-color: #6366f1 !important;
   background: rgba(99, 102, 241, 0.12) !important;
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
 }
 
 .text-truncate-2 {
@@ -85,7 +89,7 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 .gap-2 { gap: 8px; }
 .transition-all { transition: all 0.2s ease; }

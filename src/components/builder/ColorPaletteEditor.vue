@@ -48,14 +48,17 @@ const colorItems: ColorItemDef[] = [
 
 <template>
   <div class="color-palette-editor d-flex flex-column gap-3">
-    <!-- Header -->
-    <div class="d-flex align-center justify-space-between">
-      <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
-        <v-icon icon="mdi-palette-outline" size="16" class="mr-1 text-primary" />
-        3. カラーパレット (Roles & Rules)
+    <!-- Prominent Section Header -->
+    <div class="section-header justify-space-between mb-2">
+      <div class="d-flex align-center gap-2">
+        <span class="step-badge">STEP 3</span>
+        <div class="icon-box">
+          <v-icon icon="mdi-palette-outline" size="18" color="primary" />
+        </div>
+        <h3 class="section-title">カラーパレット (Roles & Rules)</h3>
       </div>
-      <v-chip size="x-small" color="secondary" variant="tonal">
-        役割ごとに1色指定
+      <v-chip size="x-small" color="secondary" variant="flat" class="font-weight-bold">
+        役割ごと指定
       </v-chip>
     </div>
 
@@ -69,7 +72,7 @@ const colorItems: ColorItemDef[] = [
     >
       <div class="d-flex align-center justify-space-between mb-1">
         <div class="d-flex align-center gap-2">
-          <span class="text-body-2 font-weight-medium">{{ item.label }}</span>
+          <span class="text-body-2 font-weight-bold text-white">{{ item.label }}</span>
           <v-chip
             v-if="item.isAccent"
             size="x-small"
@@ -77,7 +80,7 @@ const colorItems: ColorItemDef[] = [
             variant="flat"
             class="font-weight-bold"
           >
-            使用率 3% 未満厳守
+            3% 未満厳守
           </v-chip>
         </div>
       </div>
@@ -127,27 +130,27 @@ const colorItems: ColorItemDef[] = [
 .color-card {
   border-color: rgba(255, 255, 255, 0.08) !important;
   background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 
 .accent-border {
-  border-color: rgba(244, 63, 94, 0.3) !important;
-  background: rgba(244, 63, 94, 0.03) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  background: rgba(244, 63, 94, 0.04) !important;
 }
 
 .color-swatch-btn {
   width: 40px;
   height: 40px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .color-swatch-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
   border-color: #6366f1;
 }
 </style>

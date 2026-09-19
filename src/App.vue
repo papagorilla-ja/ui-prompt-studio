@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
+import appLogo from '@/assets/images/logo.jpg'
 
 const store = useConfigStore()
 
@@ -24,10 +25,15 @@ function handleReset() {
     <!-- Studio Header -->
     <header class="studio-header">
       <div class="d-flex align-center gap-3">
-        <v-icon icon="mdi-palette-swatch-outline" color="primary" size="28" />
+        <img :src="appLogo" alt="UI Prompt Studio Logo" class="header-logo" />
         <div>
-          <span class="text-h6 font-weight-bold tracking-wide">UI Prompt Studio</span>
-          <v-chip size="x-small" color="primary" variant="flat" class="ml-2">v0.1.0</v-chip>
+          <div class="d-flex align-center gap-2">
+            <span class="text-h6 font-weight-black tracking-wide bg-gradient-text">UI Prompt Studio</span>
+            <v-chip size="x-small" color="primary" variant="flat" class="font-weight-bold">v0.1.0</v-chip>
+          </div>
+          <div class="text-caption text-grey-lighten-1" style="font-size: 0.72rem !important; line-height: 1.1;">
+            AIフロントエンド指示プロンプト生成スタジオ
+          </div>
         </div>
       </div>
 
@@ -73,12 +79,14 @@ function handleReset() {
       <!-- Left Pane: Settings & Builder -->
       <section class="studio-left-pane">
         <div class="left-pane-header pa-4 border-b d-flex align-center justify-space-between sticky-header">
-          <div class="text-subtitle-1 font-weight-bold d-flex align-center">
-            <v-icon icon="mdi-tune" size="20" class="mr-2 text-primary" />
-            詳細設定パネル
+          <div class="d-flex align-center gap-2">
+            <div class="icon-box" style="width: 24px; height: 24px;">
+              <v-icon icon="mdi-tune" size="16" color="primary" />
+            </div>
+            <span class="text-subtitle-1 font-weight-bold text-white">詳細設定パネル</span>
           </div>
-          <v-chip size="x-small" color="primary" variant="tonal">
-            {{ store.config.platform === 'desktop' ? 'Desktop' : 'Web' }}
+          <v-chip size="x-small" color="primary" variant="flat" class="font-weight-bold">
+            {{ store.config.platform === 'desktop' ? 'Desktop' : 'Web' }} × {{ store.currentDesignSystemMeta.name }}
           </v-chip>
         </div>
 
@@ -89,7 +97,7 @@ function handleReset() {
       <section class="studio-right-pane">
         <!-- Top: Sandbox Preview -->
         <div class="studio-preview-section">
-          <div class="d-flex align-center justify-space-between px-4 py-2 border-b">
+          <div class="d-flex align-center justify-space-between px-4 py-2 border-b" style="background: rgba(18, 20, 28, 0.7);">
             <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
               <v-icon icon="mdi-eye-outline" size="18" class="mr-2" color="secondary" />
               リアルタイム・サンドボックスプレビュー (Issue #4)
@@ -223,8 +231,23 @@ function handleReset() {
 .sticky-header {
   position: sticky;
   top: 0;
-  background: rgba(13, 15, 21, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(13, 15, 23, 0.95);
+  backdrop-filter: blur(12px);
   z-index: 10;
+}
+
+.header-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: block;
+}
+
+.bg-gradient-text {
+  background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

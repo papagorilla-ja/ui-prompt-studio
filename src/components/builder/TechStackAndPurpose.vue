@@ -32,13 +32,14 @@ const techStacks: { value: OutputTechStack; title: string; desc: string }[] = [
   <div class="tech-stack-and-purpose d-flex flex-column gap-3">
     <!-- 5. Output Code Stack -->
     <v-card variant="outlined" class="section-card pa-3">
-      <div class="d-flex align-center justify-space-between mb-1">
-        <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
-          <v-icon icon="mdi-code-tags" size="16" class="mr-1 text-primary" />
-          5. 出力コードスタック指定
+      <div class="section-header gap-2 mb-2">
+        <span class="step-badge">STEP 5</span>
+        <div class="icon-box">
+          <v-icon icon="mdi-code-tags" size="18" color="primary" />
         </div>
+        <h3 class="section-title">出力コードスタック指定</h3>
       </div>
-      <div class="text-caption text-grey mb-2">
+      <div class="text-caption text-grey mb-3">
         AIに出力させたいフロントエンドフレームワーク・CSSを指定します
       </div>
 
@@ -60,10 +61,13 @@ const techStacks: { value: OutputTechStack; title: string; desc: string }[] = [
 
     <!-- 6. Custom Purpose / Feature Description -->
     <v-card variant="outlined" class="section-card pa-3">
-      <div class="d-flex align-center justify-space-between mb-1">
-        <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
-          <v-icon icon="mdi-text-box-edit-outline" size="16" class="mr-1 text-primary" />
-          6. アプリ固有の目的・機能要件 (任意)
+      <div class="d-flex align-center justify-space-between mb-2">
+        <div class="section-header gap-2">
+          <span class="step-badge">STEP 6</span>
+          <div class="icon-box">
+            <v-icon icon="mdi-text-box-edit-outline" size="18" color="primary" />
+          </div>
+          <h3 class="section-title">アプリ固有の目的・機能要件</h3>
         </div>
         <v-btn
           v-if="store.config.customPurpose"
@@ -75,7 +79,7 @@ const techStacks: { value: OutputTechStack; title: string; desc: string }[] = [
           クリア
         </v-btn>
       </div>
-      <div class="text-caption text-grey mb-2">
+      <div class="text-caption text-grey mb-3">
         作成したいアプリの具体的な機能やターゲット層を記入すると、プロンプトに自然に織り込まれます
       </div>
 
@@ -94,11 +98,12 @@ const techStacks: { value: OutputTechStack; title: string; desc: string }[] = [
 </template>
 
 <style scoped>
+.gap-2 { gap: 8px; }
 .gap-3 { gap: 12px; }
 
 .section-card {
   border-color: rgba(255, 255, 255, 0.08) !important;
   background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 </style>

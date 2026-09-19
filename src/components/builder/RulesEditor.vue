@@ -10,7 +10,7 @@ const radiusPresets = [
   { label: '12px', value: 12 },
   { label: '16px (Bento)', value: 16 },
   { label: '24px', value: 24 },
-  { label: '丸(9999px)', value: 9999 },
+  { label: '丸 (9999px)', value: 9999 },
 ]
 
 const maxWidthOptions = [
@@ -36,18 +36,21 @@ const h1WeightOptions = [
 </script>
 
 <template>
-  <div class="rules-editor d-flex flex-column gap-4">
-    <!-- Header -->
-    <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
-      <v-icon icon="mdi-ruler-square" size="16" class="mr-1 text-primary" />
-      2. 数値ルール (Design Tokens)
+  <div class="rules-editor d-flex flex-column gap-3">
+    <!-- Prominent Section Header -->
+    <div class="section-header gap-2 mb-2">
+      <span class="step-badge">STEP 2</span>
+      <div class="icon-box">
+        <v-icon icon="mdi-ruler-square" size="18" color="primary" />
+      </div>
+      <h3 class="section-title">数値ルール (Design Tokens)</h3>
     </div>
 
     <!-- 1. Grid Gap -->
     <v-card variant="outlined" class="rule-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
-        <span class="text-body-2 font-weight-medium">グリッド間隔 (gap)</span>
-        <v-chip size="x-small" color="primary" variant="tonal" class="font-mono font-weight-bold">
+        <span class="text-body-2 font-weight-bold text-white">グリッド間隔 (gap)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
           {{ store.config.rules.gap }}px
         </v-chip>
       </div>
@@ -66,8 +69,8 @@ const h1WeightOptions = [
     <!-- 2. Padding -->
     <v-card variant="outlined" class="rule-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
-        <span class="text-body-2 font-weight-medium">コンポーネント内側余白 (padding)</span>
-        <v-chip size="x-small" color="primary" variant="tonal" class="font-mono font-weight-bold">
+        <span class="text-body-2 font-weight-bold text-white">コンポーネント内側余白 (padding)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
           {{ store.config.rules.padding }}px
         </v-chip>
       </div>
@@ -86,8 +89,8 @@ const h1WeightOptions = [
     <!-- 3. Border Radius -->
     <v-card variant="outlined" class="rule-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
-        <span class="text-body-2 font-weight-medium">角丸の半径 (border-radius)</span>
-        <v-chip size="x-small" color="primary" variant="tonal" class="font-mono font-weight-bold">
+        <span class="text-body-2 font-weight-bold text-white">角丸の半径 (border-radius)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
           {{ store.config.rules.borderRadius }}px
         </v-chip>
       </div>
@@ -111,7 +114,7 @@ const h1WeightOptions = [
           size="x-small"
           :variant="store.config.rules.borderRadius === r.value ? 'flat' : 'outlined'"
           :color="store.config.rules.borderRadius === r.value ? 'primary' : 'default'"
-          class="cursor-pointer"
+          class="cursor-pointer font-weight-medium"
           @click="store.updateRules({ borderRadius: r.value })"
         >
           {{ r.label }}
@@ -122,8 +125,8 @@ const h1WeightOptions = [
     <!-- 4. Border Width -->
     <v-card variant="outlined" class="rule-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
-        <span class="text-body-2 font-weight-medium">境界線の太さ (border-width)</span>
-        <v-chip size="x-small" color="primary" variant="tonal" class="font-mono font-weight-bold">
+        <span class="text-body-2 font-weight-bold text-white">境界線の太さ (border-width)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
           {{ store.config.rules.borderWidth }}px
         </v-chip>
       </div>
@@ -137,15 +140,15 @@ const h1WeightOptions = [
         @update:model-value="(val) => store.updateRules({ borderWidth: val as number })"
       >
         <v-btn :value="0" class="flex-grow-1">0px (線なし)</v-btn>
-        <v-btn :value="1" class="flex-grow-1">1px (極細)</v-btn>
-        <v-btn :value="2" class="flex-grow-1">2px (強調)</v-btn>
+        <v-btn :value="1" class="flex-grow-1 font-weight-bold">1px (極細)</v-btn>
+        <v-btn :value="2" class="flex-grow-1 font-weight-bold">2px (強調)</v-btn>
         <v-btn :value="3" class="flex-grow-1">3px (太線)</v-btn>
       </v-btn-toggle>
     </v-card>
 
     <!-- 5. Typography Scale -->
     <v-card variant="outlined" class="rule-card pa-3">
-      <div class="text-body-2 font-weight-medium mb-1">タイポグラフィ比率（ジャンプ率）</div>
+      <div class="text-body-2 font-weight-bold text-white mb-1">タイポグラフィ比率（ジャンプ率）</div>
       <div class="text-caption text-grey mb-3">見出しと本文の明確なメリハリ</div>
 
       <v-row dense>
@@ -179,8 +182,8 @@ const h1WeightOptions = [
     <!-- 6. Content Max Width -->
     <v-card variant="outlined" class="rule-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
-        <span class="text-body-2 font-weight-medium">コンテンツ最大幅 (max-width)</span>
-        <v-chip size="x-small" color="primary" variant="tonal" class="font-mono font-weight-bold">
+        <span class="text-body-2 font-weight-bold text-white">コンテンツ最大幅 (max-width)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
           {{ store.config.rules.maxWidth }}
         </v-chip>
       </div>
@@ -192,7 +195,7 @@ const h1WeightOptions = [
           size="x-small"
           :variant="store.config.rules.maxWidth === w.value ? 'flat' : 'outlined'"
           :color="store.config.rules.maxWidth === w.value ? 'primary' : 'default'"
-          class="cursor-pointer"
+          class="cursor-pointer font-weight-medium"
           @click="store.updateRules({ maxWidth: w.value })"
         >
           {{ w.label }}
@@ -205,12 +208,12 @@ const h1WeightOptions = [
 <style scoped>
 .gap-1 { gap: 4px; }
 .gap-2 { gap: 8px; }
-.gap-4 { gap: 16px; }
+.gap-3 { gap: 12px; }
 .font-mono { font-family: var(--font-mono); }
 
 .rule-card {
   border-color: rgba(255, 255, 255, 0.08) !important;
   background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 </style>
