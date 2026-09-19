@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 import SandboxStage from '@/components/preview/SandboxStage.vue'
+import PromptViewer from '@/components/prompt/PromptViewer.vue'
 import appLogo from '@/assets/images/logo.jpg'
 
 const store = useConfigStore()
@@ -171,46 +172,8 @@ function handleReset() {
         </div>
 
         <!-- Bottom: Prompt Output (Linear Pro Style) -->
-        <div class="studio-prompt-section pa-4">
-          <div class="d-flex align-center justify-space-between mb-2">
-            <div class="d-flex align-center gap-2">
-              <span class="step-badge" style="background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.4); color: #a5b4fc;">OUTPUT</span>
-              <span class="text-body-2 font-weight-bold text-white">生成プロンプト (Markdown)</span>
-              <span class="text-caption text-grey font-mono">(Issue #5)</span>
-            </div>
-            <div class="d-flex align-center gap-2">
-              <button
-                type="button"
-                class="pro-action-btn pro-action-btn-primary px-3 py-1 d-flex align-center gap-1"
-                @click="showNotification('クリップボードにコピーしました！')"
-              >
-                <v-icon icon="mdi-content-copy" size="15" />
-                <span>プロンプトをコピー</span>
-              </button>
-              <button
-                type="button"
-                class="pro-action-btn px-2 py-1"
-                title="Markdownファイルとしてダウンロード"
-                @click="showNotification('ui-prompt.md をダウンロードしました')"
-              >
-                <v-icon icon="mdi-download" size="15" color="grey" />
-              </button>
-            </div>
-          </div>
-
-          <v-sheet
-            class="pa-3 rounded font-mono text-caption flex-1 overflow-y-auto"
-            color="rgba(8, 9, 13, 0.9)"
-            style="border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);"
-          >
-            <pre style="margin: 0; color: #94a3b8; line-height: 1.55;"># UI実装指示プロンプト
-## 1. アプリケーション概要
-- ターゲット種別: {{ store.config.platform === 'desktop' ? 'デスクトップアプリケーション' : 'Web アプリケーション' }}
-- 出力コードスタック: {{ store.config.outputTechStack }}
-- スタイル: {{ store.currentDesignSystemMeta.name }}
-- 基本カラー: Base={{ store.config.colors.base }}, Surface={{ store.config.colors.surface }}, Accent={{ store.config.colors.accent }}
-... (Issue #5にて完全なフォーマッターを実装)</pre>
-          </v-sheet>
+        <div class="studio-prompt-section">
+          <PromptViewer @notify="showNotification" />
         </div>
       </section>
     </main>
