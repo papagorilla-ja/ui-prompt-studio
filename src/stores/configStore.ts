@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import type {
   AppConfig,
   PlatformType,
+  ThemeMode,
   DesignSystemType,
   RulesConfig,
   ColorsConfig,
@@ -26,6 +27,7 @@ export const useConfigStore = defineStore('config', () => {
   })
 
   const isDesktop = computed(() => config.value.platform === 'desktop')
+  const isLight = computed(() => config.value.themeMode === 'light')
 
   const cssVariables = computed(() => {
     const { colors, rules } = config.value
@@ -64,13 +66,26 @@ export const useConfigStore = defineStore('config', () => {
     persistActiveConfig()
   }
 
+  function setThemeMode(mode: ThemeMode) {
+    config.value.themeMode = mode
+    const meta = currentDesignSystemMeta.value
+    if (meta) {
+      config.value.colors = {
+        ...(mode === 'light' ? meta.defaultLightColors : meta.defaultColors),
+      }
+    }
+    persistActiveConfig()
+  }
+
   function setDesignSystem(system: DesignSystemType) {
     config.value.designSystem = system
     const meta = DESIGN_SYSTEMS[system]
     if (meta) {
       // Apply professional smart recommended defaults
       config.value.rules = { ...meta.defaultRules }
-      config.value.colors = { ...meta.defaultColors }
+      config.value.colors = {
+        ...(config.value.themeMode === 'light' ? meta.defaultLightColors : meta.defaultColors),
+      }
       // Keep desktop maxWidth preference
       if (config.value.platform === 'desktop') {
         config.value.rules.maxWidth = '100%'
@@ -131,6 +146,7 @@ export const useConfigStore = defineStore('config', () => {
       config.value = {
         version: newConfig.version ?? 1,
         platform: newConfig.platform ?? initial.platform,
+        themeMode: newConfig.themeMode ?? initial.themeMode,
         designSystem: newConfig.designSystem ?? initial.designSystem,
         rules: { ...initial.rules, ...(newConfig.rules || {}) },
         colors: { ...initial.colors, ...(newConfig.colors || {}) },
@@ -240,6 +256,7 @@ export const useConfigStore = defineStore('config', () => {
           return {
             version: parsed.version ?? 1,
             platform: parsed.platform ?? initial.platform,
+            themeMode: parsed.themeMode ?? initial.themeMode,
             designSystem: parsed.designSystem ?? initial.designSystem,
             rules: { ...initial.rules, ...(parsed.rules || {}) },
             colors: { ...initial.colors, ...(parsed.colors || {}) },
@@ -276,9 +293,11 @@ export const useConfigStore = defineStore('config', () => {
     savedPresets,
     currentDesignSystemMeta,
     isDesktop,
+    isLight,
     cssVariables,
     // Actions
     setPlatform,
+    setThemeMode,
     setDesignSystem,
     updateRules,
     updateColors,

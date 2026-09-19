@@ -395,3 +395,49 @@
   font-family: var(--font-mono);
   flex-shrink: 0;
 }
+
+/* ==========================================================================
+   Light Mode Optimizations (When theme-light class is present)
+   ========================================================================== */
+.ui-preview-sandbox.theme-light .sandbox-titlebar {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-sidebar-link.active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-profile-card {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-search-box {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-table td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-input {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--ui-text-primary);
+}
+
+.ui-preview-sandbox.theme-light .sandbox-btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ui-text-primary);
+}
+
+/* Glassmorphism Light Overrides */
+.ui-preview-sandbox.system-glassmorphism.theme-light {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.ui-preview-sandbox.system-glassmorphism.theme-light .sandbox-card {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+}

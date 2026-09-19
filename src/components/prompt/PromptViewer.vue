@@ -33,7 +33,7 @@ async function handleCopy() {
 }
 
 function handleDownload() {
-  const filename = `ui-prompt-${store.config.designSystem}-${store.config.platform}.md`
+  const filename = `ui-prompt-${store.config.designSystem}-${store.config.themeMode}-${store.config.platform}.md`
   downloadMarkdownFile(promptMarkdown.value, filename)
   emit('notify', `${filename} をダウンロードしました`)
 }

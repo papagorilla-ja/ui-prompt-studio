@@ -40,6 +40,14 @@ export const DESIGN_SYSTEMS: Record<DesignSystemType, DesignSystemMeta> = {
       accent: '#38bdf8',
       border: '#2a2a32',
     },
+    defaultLightColors: {
+      base: '#f8fafc',
+      surface: '#ffffff',
+      primaryText: '#0f172a',
+      secondaryText: '#64748b',
+      accent: '#0284c7',
+      border: '#e2e8f0',
+    },
   },
   brutalism: {
     id: 'brutalism',
@@ -63,6 +71,14 @@ export const DESIGN_SYSTEMS: Record<DesignSystemType, DesignSystemMeta> = {
       secondaryText: '#9ca3af',
       accent: '#ff5a1f',
       border: '#ffffff',
+    },
+    defaultLightColors: {
+      base: '#fef08a',
+      surface: '#ffffff',
+      primaryText: '#000000',
+      secondaryText: '#1f2937',
+      accent: '#e11d48',
+      border: '#000000',
     },
   },
   minimal: {
@@ -88,6 +104,14 @@ export const DESIGN_SYSTEMS: Record<DesignSystemType, DesignSystemMeta> = {
       accent: '#6366f1',
       border: '#27272a',
     },
+    defaultLightColors: {
+      base: '#ffffff',
+      surface: '#f8fafc',
+      primaryText: '#09090b',
+      secondaryText: '#71717a',
+      accent: '#4f46e5',
+      border: '#e4e4e7',
+    },
   },
   retrofuturistic: {
     id: 'retrofuturistic',
@@ -111,6 +135,14 @@ export const DESIGN_SYSTEMS: Record<DesignSystemType, DesignSystemMeta> = {
       secondaryText: '#c084fc',
       accent: '#f43f5e',
       border: '#3c2368',
+    },
+    defaultLightColors: {
+      base: '#f1f5f9',
+      surface: '#ffffff',
+      primaryText: '#0f172a',
+      secondaryText: '#7c3aed',
+      accent: '#ec4899',
+      border: '#cbd5e1',
     },
   },
   glassmorphism: {
@@ -136,6 +168,14 @@ export const DESIGN_SYSTEMS: Record<DesignSystemType, DesignSystemMeta> = {
       accent: '#38bdf8',
       border: 'rgba(255, 255, 255, 0.15)',
     },
+    defaultLightColors: {
+      base: '#e0e7ff',
+      surface: 'rgba(255, 255, 255, 0.75)',
+      primaryText: '#1e1b4b',
+      secondaryText: '#4338ca',
+      accent: '#3b82f6',
+      border: 'rgba(255, 255, 255, 0.85)',
+    },
   },
 }
 
@@ -144,6 +184,7 @@ export function createInitialConfig(): AppConfig {
   return {
     version: 1,
     platform: 'web',
+    themeMode: 'dark',
     designSystem: 'bento',
     rules: { ...bento.defaultRules },
     colors: { ...bento.defaultColors },

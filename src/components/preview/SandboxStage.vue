@@ -56,6 +56,7 @@ const hasMainContent = computed(() => {
         :class="[
           `system-${store.config.designSystem}`,
           `density-${density}`,
+          `theme-${store.config.themeMode}`,
         ]"
         :style="[
           cssVariables,
@@ -63,8 +64,10 @@ const hasMainContent = computed(() => {
             maxWidth: store.config.rules.maxWidth === '100%' ? '840px' : store.config.rules.maxWidth,
             width: '100%',
             boxShadow: store.config.designSystem === 'brutalism'
-              ? '4px 4px 0px #ffffff'
-              : '0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+              ? (store.isLight ? '5px 5px 0px #000000' : '4px 4px 0px #ffffff')
+              : (store.isLight
+                  ? '0 24px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                  : '0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12)'),
           }
         ]"
       >
