@@ -120,10 +120,7 @@ function handleReset() {
           <!-- Floating Toolbar -->
           <div class="preview-toolbar-overlay d-flex align-center justify-space-between px-4 py-3">
             <div class="d-flex align-center gap-2">
-              <span class="workspace-label d-flex align-center gap-1">
-                <v-icon icon="mdi-monitor-dashboard" size="14" color="primary" />
-                CANVAS PREVIEW
-              </span>
+              <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center"><v-icon icon="mdi-eye-outline" size="16" class="mr-2" color="secondary" />リアルタイム・サンドボックスプレビュー</div>
             </div>
 
             <!-- Floating Pill Controls -->
@@ -210,17 +207,7 @@ function handleReset() {
                   boxShadow: store.config.designSystem === 'brutalism' ? 'none' : '0 10px 30px rgba(0,0,0,0.3)',
                 }"
               >
-                <div
-                  class="font-weight-black tracking-tight"
-                  :style="{
-                    color: store.config.colors.primaryText,
-                    fontSize: store.config.rules.h1Size,
-                    fontWeight: store.config.rules.h1Weight,
-                    lineHeight: 1.2,
-                  }"
-                >
-                  {{ store.currentDesignSystemMeta.name }}
-                </div>
+                <div class="text-h6 font-weight-bold" :style="{ color: store.config.colors.primaryText }">{{ store.currentDesignSystemMeta.name }}</div>
                 <div class="text-caption mt-2 font-mono" :style="{ color: store.config.colors.secondaryText }">
                   gap: {{ store.config.rules.gap }}px • padding: {{ store.config.rules.padding }}px • radius: {{ store.config.rules.borderRadius }}px • border: {{ store.config.rules.borderWidth }}px
                 </div>
