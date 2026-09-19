@@ -26,16 +26,15 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
     <div class="section-header gap-2 mb-3">
       <span class="step-badge">STEP 0</span>
       <div class="icon-box">
-        <v-icon icon="mdi-devices" size="18" color="primary" />
+        <v-icon icon="mdi-devices" size="16" color="primary" />
       </div>
       <h3 class="section-title">ターゲットアプリ種別</h3>
     </div>
 
     <v-row dense>
       <v-col v-for="p in platforms" :key="p.value" cols="6">
-        <v-card
-          variant="outlined"
-          class="platform-card pa-3 cursor-pointer transition-all"
+        <div
+          class="platform-card linear-card pa-3 cursor-pointer"
           :class="{
             'active-platform': store.config.platform === p.value,
           }"
@@ -48,7 +47,7 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
                 :color="store.config.platform === p.value ? 'primary' : 'grey'"
                 size="20"
               />
-              <span class="text-body-2 font-weight-bold">{{ p.title }}</span>
+              <span class="text-body-2 font-weight-bold text-white">{{ p.title }}</span>
             </div>
             <v-icon
               v-if="store.config.platform === p.value"
@@ -57,10 +56,10 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
               size="18"
             />
           </div>
-          <div class="text-caption text-grey text-truncate-2">
+          <div class="text-caption text-grey-lighten-1 text-truncate-2">
             {{ p.desc }}
           </div>
-        </v-card>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -68,20 +67,14 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
 
 <style scoped>
 .platform-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 10px !important;
-}
-
-.platform-card:hover {
-  border-color: rgba(99, 102, 241, 0.4) !important;
-  background: rgba(99, 102, 241, 0.05) !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .active-platform {
   border-color: #6366f1 !important;
-  background: rgba(99, 102, 241, 0.12) !important;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.18) 0%, rgba(56, 189, 248, 0.08) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(99, 102, 241, 0.25) !important;
 }
 
 .text-truncate-2 {
@@ -92,5 +85,4 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
   line-height: 1.35;
 }
 .gap-2 { gap: 8px; }
-.transition-all { transition: all 0.2s ease; }
 </style>

@@ -29,7 +29,7 @@ const systems = Object.values(DESIGN_SYSTEMS)
       <div class="d-flex align-center gap-2">
         <span class="step-badge">STEP 1</span>
         <div class="icon-box">
-          <v-icon icon="mdi-shape-outline" size="18" color="primary" />
+          <v-icon icon="mdi-shape-outline" size="16" color="primary" />
         </div>
         <h3 class="section-title">デザインシステム・世界観</h3>
       </div>
@@ -39,11 +39,10 @@ const systems = Object.values(DESIGN_SYSTEMS)
     </div>
 
     <div class="systems-grid d-flex flex-column gap-2">
-      <v-card
+      <div
         v-for="s in systems"
         :key="s.id"
-        variant="outlined"
-        class="system-card pa-3 cursor-pointer transition-all"
+        class="system-card linear-card pa-3 cursor-pointer"
         :class="{
           'active-system': store.config.designSystem === s.id,
         }"
@@ -66,7 +65,7 @@ const systems = Object.values(DESIGN_SYSTEMS)
           </div>
 
           <!-- System Info -->
-          <div class="flex-grow-1">
+          <div class="flex-grow-1 overflow-hidden">
             <div class="d-flex align-center justify-space-between mb-1">
               <div class="d-flex align-center gap-2">
                 <span class="text-body-2 font-weight-bold text-white">{{ s.name }}</span>
@@ -87,16 +86,16 @@ const systems = Object.values(DESIGN_SYSTEMS)
               />
             </div>
 
-            <div class="text-caption text-grey-lighten-1 mb-1 line-clamp-1">
+            <div class="text-caption text-grey-lighten-2 mb-1 line-clamp-1">
               {{ s.subtitle }}
             </div>
 
-            <div class="text-caption text-grey-darken-1 line-clamp-2">
+            <div class="text-caption text-grey line-clamp-2">
               {{ s.description }}
             </div>
           </div>
         </div>
-      </v-card>
+      </div>
     </div>
   </div>
 </template>
@@ -104,33 +103,21 @@ const systems = Object.values(DESIGN_SYSTEMS)
 <style scoped>
 .gap-2 { gap: 8px; }
 .gap-3 { gap: 12px; }
-.transition-all { transition: all 0.2s ease; }
-
-.system-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 10px !important;
-}
-
-.system-card:hover {
-  border-color: rgba(99, 102, 241, 0.4) !important;
-  background: rgba(99, 102, 241, 0.04) !important;
-}
 
 .active-system {
   border-color: #6366f1 !important;
-  background: rgba(99, 102, 241, 0.12) !important;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.18) 0%, rgba(56, 189, 248, 0.08) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 20px rgba(99, 102, 241, 0.25) !important;
 }
 
 .system-thumbnail-container {
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 

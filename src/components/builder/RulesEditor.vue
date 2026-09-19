@@ -41,13 +41,13 @@ const h1WeightOptions = [
     <div class="section-header gap-2 mb-2">
       <span class="step-badge">STEP 2</span>
       <div class="icon-box">
-        <v-icon icon="mdi-ruler-square" size="18" color="primary" />
+        <v-icon icon="mdi-ruler-square" size="16" color="primary" />
       </div>
       <h3 class="section-title">数値ルール (Design Tokens)</h3>
     </div>
 
     <!-- 1. Grid Gap -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
         <span class="text-body-2 font-weight-bold text-white">グリッド間隔 (gap)</span>
         <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
@@ -64,10 +64,10 @@ const h1WeightOptions = [
         hide-details
         density="compact"
       />
-    </v-card>
+    </div>
 
     <!-- 2. Padding -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
         <span class="text-body-2 font-weight-bold text-white">コンポーネント内側余白 (padding)</span>
         <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
@@ -84,10 +84,10 @@ const h1WeightOptions = [
         hide-details
         density="compact"
       />
-    </v-card>
+    </div>
 
     <!-- 3. Border Radius -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
         <span class="text-body-2 font-weight-bold text-white">角丸の半径 (border-radius)</span>
         <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
@@ -120,10 +120,10 @@ const h1WeightOptions = [
           {{ r.label }}
         </v-chip>
       </div>
-    </v-card>
+    </div>
 
     <!-- 4. Border Width -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
         <span class="text-body-2 font-weight-bold text-white">境界線の太さ (border-width)</span>
         <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
@@ -144,10 +144,10 @@ const h1WeightOptions = [
         <v-btn :value="2" class="flex-grow-1 font-weight-bold">2px (強調)</v-btn>
         <v-btn :value="3" class="flex-grow-1">3px (太線)</v-btn>
       </v-btn-toggle>
-    </v-card>
+    </div>
 
     <!-- 5. Typography Scale -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="text-body-2 font-weight-bold text-white mb-1">タイポグラフィ比率（ジャンプ率）</div>
       <div class="text-caption text-grey mb-3">見出しと本文の明確なメリハリ</div>
 
@@ -177,10 +177,10 @@ const h1WeightOptions = [
           />
         </v-col>
       </v-row>
-    </v-card>
+    </div>
 
     <!-- 6. Content Max Width -->
-    <v-card variant="outlined" class="rule-card pa-3">
+    <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
         <span class="text-body-2 font-weight-bold text-white">コンテンツ最大幅 (max-width)</span>
         <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
@@ -201,7 +201,7 @@ const h1WeightOptions = [
           {{ w.label }}
         </v-chip>
       </div>
-    </v-card>
+    </div>
   </div>
 </template>
 
@@ -210,10 +210,4 @@ const h1WeightOptions = [
 .gap-2 { gap: 8px; }
 .gap-3 { gap: 12px; }
 .font-mono { font-family: var(--font-mono); }
-
-.rule-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 10px !important;
-}
 </style>
