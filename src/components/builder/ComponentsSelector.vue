@@ -113,17 +113,21 @@ const categories: ComponentCategory[] = [
 
 <template>
   <div class="components-selector d-flex flex-column gap-3">
-    <!-- Header -->
-    <div class="d-flex align-center justify-space-between">
-      <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
-        <v-icon icon="mdi-checkbox-multiple-marked-outline" size="16" class="mr-1 text-primary" />
-        4. 実装コンポーネントの対象
+    <!-- Prominent Section Header -->
+    <div class="section-header justify-space-between mb-2">
+      <div class="d-flex align-center gap-2">
+        <span class="step-badge">STEP 4</span>
+        <div class="icon-box">
+          <v-icon icon="mdi-checkbox-multiple-marked-outline" size="18" color="primary" />
+        </div>
+        <h3 class="section-title">実装コンポーネントの対象</h3>
       </div>
       <div class="d-flex align-center gap-1">
         <v-btn
           size="x-small"
           variant="tonal"
           color="primary"
+          class="font-weight-bold"
           @click="store.setAllComponents(true)"
         >
           全選択
@@ -146,14 +150,13 @@ const categories: ComponentCategory[] = [
       variant="outlined"
       class="cat-card pa-3"
     >
-      <div class="text-body-2 font-weight-bold text-grey-lighten-1 mb-2 d-flex align-center">
+      <div class="text-body-2 font-weight-bold text-white mb-2 d-flex align-center">
         <v-icon :icon="cat.icon" size="16" class="mr-1 text-primary" />
         {{ cat.title }}
       </div>
 
       <div class="d-flex flex-column gap-1">
         <template v-for="item in cat.items" :key="item.key">
-          <!-- Only show titlebar if desktop or let user toggle it -->
           <div
             class="component-item d-flex align-start pa-2 rounded cursor-pointer transition-all"
             :class="{ 'item-active': store.config.components[item.key] }"
@@ -168,12 +171,13 @@ const categories: ComponentCategory[] = [
             />
             <div class="flex-grow-1">
               <div class="d-flex align-center gap-2">
-                <span class="text-body-2 font-weight-medium">{{ item.label }}</span>
+                <span class="text-body-2 font-weight-bold" :class="store.config.components[item.key] ? 'text-white' : 'text-grey-lighten-1'">{{ item.label }}</span>
                 <v-chip
                   v-if="item.desktopOnly && store.isDesktop"
                   size="x-small"
                   color="secondary"
                   variant="flat"
+                  class="font-weight-bold"
                 >
                   Desktop推奨
                 </v-chip>
@@ -204,14 +208,14 @@ const categories: ComponentCategory[] = [
 .cat-card {
   border-color: rgba(255, 255, 255, 0.08) !important;
   background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 
 .component-item:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .item-active {
-  background: rgba(99, 102, 241, 0.06);
+  background: rgba(99, 102, 241, 0.08);
 }
 </style>
