@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useConfigStore } from '@/stores/configStore'
-import { DESIGN_SYSTEMS } from '@/constants/presets'
-import type { DesignSystemType, PlatformType } from '@/types/config'
+import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 
 const store = useConfigStore()
 
@@ -18,8 +17,6 @@ function handleReset() {
   store.resetToDefault()
   showNotification('設定を初期デフォルト値にリセットしました')
 }
-
-const designSystemsList = Object.values(DESIGN_SYSTEMS)
 </script>
 
 <template>
@@ -74,63 +71,18 @@ const designSystemsList = Object.values(DESIGN_SYSTEMS)
     <!-- Studio Main 2-Pane Body -->
     <main class="studio-body">
       <!-- Left Pane: Settings & Builder -->
-      <section class="studio-left-pane pa-4">
-        <div class="d-flex align-center justify-space-between mb-4">
+      <section class="studio-left-pane">
+        <div class="left-pane-header pa-4 border-b d-flex align-center justify-space-between sticky-header">
           <div class="text-subtitle-1 font-weight-bold d-flex align-center">
-            <v-icon icon="mdi-tune" size="20" class="mr-2" color="primary" />
+            <v-icon icon="mdi-tune" size="20" class="mr-2 text-primary" />
             詳細設定パネル
           </div>
-          <span class="text-caption text-grey">Issue #3</span>
+          <v-chip size="x-small" color="primary" variant="tonal">
+            {{ store.config.platform === 'desktop' ? 'Desktop' : 'Web' }}
+          </v-chip>
         </div>
 
-        <!-- 0. Target Platform -->
-        <v-card variant="outlined" class="mb-4 pa-3" color="rgba(255,255,255,0.06)">
-          <div class="text-caption font-weight-bold text-grey-lighten-1 mb-2">
-            0. ターゲットアプリ種別
-          </div>
-          <v-btn-toggle
-            :model-value="store.config.platform"
-            mandatory
-            density="compact"
-            color="primary"
-            class="w-100"
-            @update:model-value="(val) => store.setPlatform(val as PlatformType)"
-          >
-            <v-btn value="web" class="flex-grow-1" prepend-icon="mdi-web">Web App</v-btn>
-            <v-btn value="desktop" class="flex-grow-1" prepend-icon="mdi-laptop">Desktop</v-btn>
-          </v-btn-toggle>
-        </v-card>
-
-        <!-- 1. Design System Selection -->
-        <v-card variant="outlined" class="mb-4 pa-3" color="rgba(255,255,255,0.06)">
-          <div class="text-caption font-weight-bold text-grey-lighten-1 mb-2">
-            1. デザインシステム選択
-          </div>
-          <v-chip-group
-            :model-value="store.config.designSystem"
-            mandatory
-            selected-class="text-primary"
-            column
-            @update:model-value="(val) => store.setDesignSystem(val as DesignSystemType)"
-          >
-            <v-chip
-              v-for="ds in designSystemsList"
-              :key="ds.id"
-              :value="ds.id"
-              filter
-              variant="outlined"
-            >
-              {{ ds.name }}
-            </v-chip>
-          </v-chip-group>
-          <div class="text-caption text-grey-lighten-2 mt-2 pa-2 rounded" style="background: rgba(255,255,255,0.03);">
-            {{ store.currentDesignSystemMeta.subtitle }}
-          </div>
-        </v-card>
-
-        <div class="text-caption text-grey text-center py-4">
-          ※ Issue #3 にてスライダー、カラーピッカー、コンポーネント選択の詳細UIを実装します。
-        </div>
+        <BuilderPanel />
       </section>
 
       <!-- Right Pane: Preview (Top) & Prompt (Bottom) -->
@@ -244,6 +196,7 @@ const designSystemsList = Object.values(DESIGN_SYSTEMS)
             <pre style="margin: 0; color: #94a3b8; line-height: 1.5;"># UI実装指示プロンプト
 ## 1. アプリケーション概要
 - ターゲット種別: {{ store.config.platform === 'desktop' ? 'デスクトップアプリケーション' : 'Web アプリケーション' }}
+- 出力コードスタック: {{ store.config.outputTechStack }}
 - スタイル: {{ store.currentDesignSystemMeta.name }}
 - 基本カラー: Base={{ store.config.colors.base }}, Surface={{ store.config.colors.surface }}, Accent={{ store.config.colors.accent }}
 ... (Issue #5にて完全なフォーマッターを実装)</pre>
@@ -267,4 +220,11 @@ const designSystemsList = Object.values(DESIGN_SYSTEMS)
 .gap-3 { gap: 12px; }
 .tracking-wide { letter-spacing: 0.05em; }
 .font-mono { font-family: var(--font-mono); }
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: rgba(13, 15, 21, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
 </style>
