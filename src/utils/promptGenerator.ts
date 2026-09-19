@@ -120,6 +120,7 @@ ${windowFeatures}
 
 ## 4. 厳格なカラーパレット
 以下の指定カラーコード（HEX）をそれぞれの役割に限定して使用し、勝手な原色や不要なグラデーションは一切追加しないでください。
+- カラーテーマモード: ${config.themeMode === 'light' ? '☀️ ライトモード (Light Theme / 明るく清潔感のある白・淡色基調)' : '🌙 ダークモード (Dark Theme / 集中力を高める深色・黒基調)'}
 - メイン背景色 (Base / Background): ${config.colors.base}
 - コンポーネント背景色 (Surface / Card): ${config.colors.surface}
 - 主要テキスト色 (Primary Text): ${config.colors.primaryText} (高い視認性)

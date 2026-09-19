@@ -1,4 +1,5 @@
 export type PlatformType = 'web' | 'desktop'
+export type ThemeMode = 'dark' | 'light'
 
 export type DesignSystemType =
   | 'bento'
@@ -57,6 +58,7 @@ export interface ComponentsConfig {
 export interface AppConfig {
   version: number
   platform: PlatformType
+  themeMode: ThemeMode
   designSystem: DesignSystemType
   rules: RulesConfig
   colors: ColorsConfig
@@ -79,4 +81,5 @@ export interface DesignSystemMeta {
   description: string
   defaultRules: RulesConfig
   defaultColors: ColorsConfig
+  defaultLightColors: ColorsConfig
 }

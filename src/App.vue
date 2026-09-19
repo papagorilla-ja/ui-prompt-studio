@@ -52,7 +52,7 @@ function handleReset() {
         </div>
         <span class="divider-dot">•</span>
         <div class="text-caption font-mono text-primary font-weight-bold">
-          {{ store.config.platform.toUpperCase() }} × {{ store.currentDesignSystemMeta.name.split('/')[0].trim() }}
+          {{ store.config.platform.toUpperCase() }} × {{ store.currentDesignSystemMeta.name.split('/')[0].trim() }} × {{ store.isLight ? 'LIGHT' : 'DARK' }}
         </div>
       </div>
 
