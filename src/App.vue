@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
+import SandboxStage from '@/components/preview/SandboxStage.vue'
 import appLogo from '@/assets/images/logo.jpg'
 
 const store = useConfigStore()
@@ -163,73 +164,9 @@ function handleReset() {
             </div>
           </div>
 
-          <!-- Centered Mockup Sandbox Stage -->
-          <div class="flex-1 d-flex align-center justify-center pa-6 overflow-hidden">
-            <!-- Sandbox preview root applying cssVariables and zoom scale -->
-            <div
-              class="ui-preview-sandbox pa-6 rounded-lg d-flex flex-column align-center justify-center transition-all"
-              :style="{
-                background: store.config.colors.base,
-                border: `${store.config.rules.borderWidth}px solid ${store.config.colors.border}`,
-                borderRadius: `${store.config.rules.borderRadius}px`,
-                width: '90%',
-                maxWidth: store.config.rules.maxWidth === '100%' ? '760px' : store.config.rules.maxWidth,
-                minHeight: '260px',
-                transform: `scale(${Number(zoomLevel) / 100})`,
-                transformOrigin: 'center center',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1)',
-              }"
-            >
-              <!-- Desktop Titlebar Mockup if Desktop is active -->
-              <div
-                v-if="store.isDesktop"
-                class="w-100 d-flex align-center justify-space-between pb-3 mb-3 border-b"
-                style="border-color: rgba(255,255,255,0.12) !important;"
-              >
-                <div class="d-flex align-center" style="gap: 6px;">
-                  <span style="width: 11px; height: 11px; border-radius: 50%; background: #ff5f56; display: inline-block; box-shadow: 0 0 6px rgba(255,95,86,0.5);"></span>
-                  <span style="width: 11px; height: 11px; border-radius: 50%; background: #ffbd2e; display: inline-block; box-shadow: 0 0 6px rgba(255,189,46,0.5);"></span>
-                  <span style="width: 11px; height: 11px; border-radius: 50%; background: #27c93f; display: inline-block; box-shadow: 0 0 6px rgba(39,201,63,0.5);"></span>
-                </div>
-                <span class="text-caption font-mono font-weight-bold" :style="{ color: store.config.colors.secondaryText }">
-                  UI Prompt Studio // {{ store.currentDesignSystemMeta.name }}
-                </span>
-                <div style="width: 45px;"></div>
-              </div>
-
-              <!-- Main Card Preview Mockup -->
-              <div
-                class="pa-5 rounded mb-2 text-center w-100 transition-all"
-                :style="{
-                  background: store.config.colors.surface,
-                  border: `${store.config.rules.borderWidth}px solid ${store.config.colors.border}`,
-                  borderRadius: `${store.config.rules.borderRadius}px`,
-                  boxShadow: store.config.designSystem === 'brutalism' ? 'none' : '0 10px 30px rgba(0,0,0,0.3)',
-                }"
-              >
-                <div class="text-h6 font-weight-bold" :style="{ color: store.config.colors.primaryText }">{{ store.currentDesignSystemMeta.name }}</div>
-                <div class="text-caption mt-2 font-mono" :style="{ color: store.config.colors.secondaryText }">
-                  gap: {{ store.config.rules.gap }}px • padding: {{ store.config.rules.padding }}px • radius: {{ store.config.rules.borderRadius }}px • border: {{ store.config.rules.borderWidth }}px
-                </div>
-
-                <div class="d-flex align-center justify-center gap-2 mt-4">
-                  <button
-                    type="button"
-                    class="px-4 py-2 text-caption font-weight-bold tracking-wide"
-                    :style="{
-                      background: store.config.colors.accent,
-                      color: '#ffffff',
-                      borderRadius: `${store.config.rules.borderRadius}px`,
-                      border: 'none',
-                      boxShadow: `0 4px 14px ${store.config.colors.accent}40`,
-                      cursor: 'pointer',
-                    }"
-                  >
-                    Primary Action (3% Accent)
-                  </button>
-                </div>
-              </div>
-            </div>
+          <!-- Interactive Sandbox Stage -->
+          <div class="flex-1 overflow-hidden d-flex flex-column">
+            <SandboxStage :zoom="zoomLevel" :density="previewDensity" />
           </div>
         </div>
 
