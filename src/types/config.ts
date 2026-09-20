@@ -7,6 +7,8 @@ export type DesignSystemType =
   | 'minimal'
   | 'retrofuturistic'
   | 'glassmorphism'
+  | 'kawaii'
+  | 'gaming'
 
 export type OutputTechStack =
   | 'react-tailwind'
