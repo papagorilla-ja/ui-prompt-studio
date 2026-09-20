@@ -6,6 +6,7 @@ import SandboxStage from '@/components/preview/SandboxStage.vue'
 import PromptViewer from '@/components/prompt/PromptViewer.vue'
 import WorkflowGuideBar from '@/components/guidance/WorkflowGuideBar.vue'
 import OnboardingModal from '@/components/guidance/OnboardingModal.vue'
+import StyleManagerModal from '@/components/presets/StyleManagerModal.vue'
 import appLogo from '@/assets/images/logo.jpg'
 
 const store = useConfigStore()
@@ -15,6 +16,11 @@ const snackbarText = ref('')
 const zoomLevel = ref('100')
 const previewDensity = ref('default')
 const onboardingModalRef = ref<InstanceType<typeof OnboardingModal> | null>(null)
+const styleManagerModalRef = ref<InstanceType<typeof StyleManagerModal> | null>(null)
+
+function openStyleManager(tab: 'presets' | 'json' = 'presets') {
+  styleManagerModalRef.value?.open(tab)
+}
 
 function openGuide() {
   onboardingModalRef.value?.open()
@@ -77,16 +83,21 @@ function handleReset() {
         <button
           type="button"
           class="pro-action-btn px-3 py-1 d-flex align-center gap-1"
-          @click="showNotification('マイスタイル保存ダイアログ (Issue #6で実装)')"
+          title="お気に入りスタイルを保存・呼び出し"
+          @click="openStyleManager('presets')"
         >
           <v-icon icon="mdi-bookmark-outline" size="16" color="primary" />
           <span>スタイル保存</span>
+          <span v-if="store.savedPresets.length > 0" class="saved-preset-count font-mono">
+            {{ store.savedPresets.length }}
+          </span>
         </button>
 
         <button
           type="button"
           class="pro-action-btn px-3 py-1 d-flex align-center gap-1"
-          @click="showNotification('JSON入出力 (Issue #6で実装)')"
+          title="設定をJSONでエクスポート / インポート"
+          @click="openStyleManager('json')"
         >
           <v-icon icon="mdi-code-json" size="16" color="grey" />
           <span>JSON</span>
@@ -207,6 +218,9 @@ function handleReset() {
     <!-- Onboarding Guide Modal (Issue #28) -->
     <OnboardingModal ref="onboardingModalRef" />
 
+    <!-- Style Manager & JSON Backup Modal (Issue #6) -->
+    <StyleManagerModal ref="styleManagerModalRef" @notify="showNotification" />
+
     <!-- Global Snackbar -->
     <v-snackbar v-model="snackbar" timeout="2500" color="primary" location="bottom right">
       {{ snackbarText }}
@@ -326,6 +340,16 @@ function handleReset() {
 .pro-action-btn-guide:hover {
   background: rgba(245, 158, 11, 0.22) !important;
   border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+.saved-preset-count {
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.5);
 }
 
 .preview-sync-hint {
