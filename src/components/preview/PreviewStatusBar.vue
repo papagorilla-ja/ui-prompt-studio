@@ -1,7 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useConfigStore } from '@/stores/configStore'
 
 const store = useConfigStore()
+
+const stackBadge = computed(() => {
+  const map: Record<string, string> = {
+    'react-tailwind': 'React+Tailwind',
+    'vue-tailwind': 'Vue 3+Tailwind',
+    'html-vanilla': 'HTML5+CSS',
+    'html-single-file': 'Single-file HTML (GAS)',
+    'nextjs-shadcn': 'Next.js+shadcn',
+  }
+  return map[store.config.outputTechStack] || store.config.outputTechStack
+})
 </script>
 
 <template>
@@ -24,7 +36,7 @@ const store = useConfigStore()
       <span style="opacity: 0.3;">|</span>
       <span>UTF-8</span>
       <span style="opacity: 0.3;">|</span>
-      <span style="color: var(--ui-accent); font-weight: 700;">{{ store.config.outputTechStack }}</span>
+      <span style="color: var(--ui-accent); font-weight: 700;">{{ stackBadge }}</span>
     </div>
   </footer>
 </template>

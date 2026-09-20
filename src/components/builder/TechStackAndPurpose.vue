@@ -21,6 +21,11 @@ const techStacks: { value: OutputTechStack; title: string; desc: string }[] = [
     desc: '依存ゼロ・ピュアな静的マークアップ',
   },
   {
+    value: 'html-single-file',
+    title: '単一HTML完結 (GAS / ローカル即時実行)',
+    desc: 'ビルド不要。<style><script>内包でGASや直接実行に対応',
+  },
+  {
     value: 'nextjs-shadcn',
     title: 'Next.js + shadcn/ui',
     desc: '洗練されたRadixベースのモダンUI',

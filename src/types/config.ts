@@ -14,6 +14,7 @@ export type OutputTechStack =
   | 'react-tailwind'
   | 'vue-tailwind'
   | 'html-vanilla'
+  | 'html-single-file'
   | 'nextjs-shadcn'
 
 export interface RulesConfig {
