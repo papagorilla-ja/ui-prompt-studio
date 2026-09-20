@@ -17,6 +17,34 @@ export type OutputTechStack =
   | 'html-single-file'
   | 'nextjs-shadcn'
 
+export type ImageAssetType =
+  | 'app-icon'
+  | 'hero-illustration'
+  | 'background-art'
+  | 'character-sprite'
+  | 'empty-state'
+
+export type TargetImageAI =
+  | 'gemini'
+  | 'midjourney'
+  | 'dalle3'
+  | 'stable-diffusion'
+
+export type ImageAspectRatio =
+  | '1:1'
+  | '16:9'
+  | '4:3'
+  | '9:16'
+  | '21:9'
+
+export interface ImageAssetConfig {
+  assetType: ImageAssetType
+  themeMotif: string
+  targetAi: TargetImageAI
+  aspectRatio: ImageAspectRatio
+  includeNegativePrompt: boolean
+}
+
 export interface RulesConfig {
   gap: number           // グリッド間隔 (px)
   padding: number       // 内側余白 (px)
@@ -69,6 +97,7 @@ export interface AppConfig {
   components: ComponentsConfig
   customPurpose: string
   outputTechStack: OutputTechStack
+  imageAsset: ImageAssetConfig
 }
 
 export interface SavedPreset {

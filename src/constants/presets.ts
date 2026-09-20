@@ -1,4 +1,12 @@
-import type { DesignSystemMeta, DesignSystemType, ComponentsConfig, AppConfig } from '@/types/config'
+import type { DesignSystemMeta, DesignSystemType, ComponentsConfig, AppConfig, ImageAssetConfig } from '@/types/config'
+
+export const DEFAULT_IMAGE_ASSET: ImageAssetConfig = {
+  assetType: 'app-icon',
+  themeMotif: '洗練されたミニマルなアプリアイコンシンボル',
+  targetAi: 'gemini',
+  aspectRatio: '1:1',
+  includeNegativePrompt: true,
+}
 
 export const DEFAULT_COMPONENTS: ComponentsConfig = {
   titlebar: false,
@@ -262,5 +270,6 @@ export function createInitialConfig(): AppConfig {
     components: { ...DEFAULT_COMPONENTS },
     customPurpose: '',
     outputTechStack: 'react-tailwind',
+    imageAsset: { ...DEFAULT_IMAGE_ASSET },
   }
 }

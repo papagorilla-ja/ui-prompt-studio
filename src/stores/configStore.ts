@@ -10,6 +10,7 @@ import type {
   ComponentsConfig,
   OutputTechStack,
   SavedPreset,
+  ImageAssetConfig,
 } from '@/types/config'
 import { DESIGN_SYSTEMS, createInitialConfig } from '@/constants/presets'
 
@@ -136,6 +137,11 @@ export const useConfigStore = defineStore('config', () => {
     persistActiveConfig()
   }
 
+  function updateImageAsset(asset: Partial<ImageAssetConfig>) {
+    config.value.imageAsset = { ...config.value.imageAsset, ...asset }
+    persistActiveConfig()
+  }
+
   function resetToDefault() {
     config.value = createInitialConfig()
     persistActiveConfig()
@@ -154,6 +160,7 @@ export const useConfigStore = defineStore('config', () => {
         components: { ...initial.components, ...(newConfig.components || {}) },
         customPurpose: newConfig.customPurpose ?? '',
         outputTechStack: newConfig.outputTechStack ?? initial.outputTechStack,
+        imageAsset: { ...initial.imageAsset, ...(newConfig.imageAsset || {}) },
       }
       persistActiveConfig()
       return true
@@ -264,6 +271,7 @@ export const useConfigStore = defineStore('config', () => {
             components: { ...initial.components, ...(parsed.components || {}) },
             customPurpose: parsed.customPurpose ?? '',
             outputTechStack: parsed.outputTechStack ?? initial.outputTechStack,
+            imageAsset: { ...initial.imageAsset, ...(parsed.imageAsset || {}) },
           }
         }
       }
@@ -306,6 +314,7 @@ export const useConfigStore = defineStore('config', () => {
     setAllComponents,
     setCustomPurpose,
     setOutputTechStack,
+    updateImageAsset,
     resetToDefault,
     loadConfig,
     saveCurrentAsPreset,
