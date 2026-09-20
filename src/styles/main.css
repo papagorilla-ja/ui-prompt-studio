@@ -280,3 +280,11 @@ body::after {
   padding: 3px 6px;
 }
 
+
+/* 6. Step Guidance Subtext (Issue #28) */
+.step-guide-subtext {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}

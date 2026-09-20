@@ -38,13 +38,16 @@ const h1WeightOptions = [
 <template>
   <div class="rules-editor d-flex flex-column gap-3">
     <!-- Prominent Section Header -->
-    <div class="section-header gap-2 mb-2">
+    <div class="section-header gap-2 mb-1">
       <span class="step-badge">STEP 2</span>
       <div class="icon-box">
         <v-icon icon="mdi-ruler-square" size="16" color="primary" />
       </div>
       <h3 class="section-title">数値ルール (Design Tokens)</h3>
     </div>
+    <p class="step-guide-subtext">
+      余白・角丸・ボタン隙間・ボーダー幅など、画面全体の一貫性を保つための厳格な数値デザイントークンを指定します。
+    </p>
 
     <!-- 1. Grid Gap -->
     <div class="linear-card pa-3">
