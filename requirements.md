@@ -183,6 +183,7 @@ AIに出力させたいコードベースを指定し、プロンプトの末尾
 - `Vue 3 (SFC) + TailwindCSS`
 - `HTML5 + Vanilla CSS (No Framework)`
 - `Next.js (App Router) + shadcn/ui`
+- `単一HTML完結 (Single-file HTML / GAS・ローカル即時実行向け)`: ビルド不要、<style>と<script>を内包しブラウザ直接実行や Google Apps Script (HTML Service) でそのまま動作する単一ファイルコード。
 
 #### (6) アプリケーション固有の目的・機能記述（任意）
 - 自由記述欄（例: `ローカルのマークダウンファイルを爆速プレビュー・編集できる軽量デスクトップエディタ`）
