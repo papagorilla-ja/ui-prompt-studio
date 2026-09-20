@@ -25,7 +25,7 @@ const systems = Object.values(DESIGN_SYSTEMS)
 <template>
   <div class="design-system-selector">
     <!-- Prominent Section Header -->
-    <div class="section-header justify-space-between mb-3">
+    <div class="section-header justify-space-between mb-2">
       <div class="d-flex align-center gap-2">
         <span class="step-badge">STEP 1</span>
         <div class="icon-box">
@@ -36,6 +36,47 @@ const systems = Object.values(DESIGN_SYSTEMS)
       <v-chip size="x-small" color="primary" variant="flat" class="font-weight-bold">
         推奨初期値自動適用
       </v-chip>
+    </div>
+
+    <!-- Theme Mode Selector (Dark / Light) Placed prominently at top of STEP 1 -->
+    <div class="theme-mode-card linear-card pa-3 mb-3">
+      <div class="d-flex align-center justify-space-between mb-2">
+        <div class="d-flex align-center gap-2">
+          <v-icon icon="mdi-theme-light-dark" size="16" color="primary" />
+          <span class="text-body-2 font-weight-bold text-white">カラーテーマモード</span>
+        </div>
+        <span class="text-caption font-mono text-grey font-weight-bold">
+          {{ store.isLight ? '☀️ LIGHT MODE' : '🌙 DARK MODE' }}
+        </span>
+      </div>
+
+      <div class="theme-mode-toggle-group d-flex align-center">
+        <button
+          id="btn-theme-dark"
+          type="button"
+          class="theme-mode-btn flex-1 d-flex align-center justify-center gap-2"
+          :class="{ 'theme-mode-btn-active': !store.isLight }"
+          @click="store.setThemeMode('dark')"
+        >
+          <v-icon icon="mdi-weather-night" size="16" />
+          <span>ダークモード</span>
+        </button>
+
+        <button
+          id="btn-theme-light"
+          type="button"
+          class="theme-mode-btn flex-1 d-flex align-center justify-center gap-2"
+          :class="{ 'theme-mode-btn-active': store.isLight }"
+          @click="store.setThemeMode('light')"
+        >
+          <v-icon icon="mdi-white-balance-sunny" size="16" />
+          <span>ライトモード</span>
+        </button>
+      </div>
+
+      <div class="text-caption text-grey mt-2" style="font-size: 0.68rem !important; line-height: 1.3;">
+        ※切り替え時に、選択中の世界観に合わせた推奨カラーパレット（白背景 / 深色背景）を自動セットします。
+      </div>
     </div>
 
     <div class="systems-grid d-flex flex-column gap-2">
@@ -154,5 +195,36 @@ const systems = Object.values(DESIGN_SYSTEMS)
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.theme-mode-toggle-group {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.theme-mode-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.theme-mode-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.theme-mode-btn-active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(56, 189, 248, 0.85)) !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
 }
 </style>

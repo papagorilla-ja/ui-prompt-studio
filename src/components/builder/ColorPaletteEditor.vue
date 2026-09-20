@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useConfigStore } from '@/stores/configStore'
-import type { ColorsConfig, ThemeMode } from '@/types/config'
+import type { ColorsConfig } from '@/types/config'
 
 const store = useConfigStore()
 
@@ -45,9 +45,7 @@ const colorItems: ColorItemDef[] = [
   },
 ]
 
-function handleThemeChange(mode: ThemeMode) {
-  store.setThemeMode(mode)
-}
+
 </script>
 
 <template>
@@ -66,45 +64,17 @@ function handleThemeChange(mode: ThemeMode) {
       </v-chip>
     </div>
 
-    <!-- Theme Mode Selector (Dark / Light) -->
-    <div class="theme-mode-card linear-card pa-3">
-      <div class="d-flex align-center justify-space-between mb-2">
-        <div class="d-flex align-center gap-2">
-          <v-icon icon="mdi-theme-light-dark" size="16" color="primary" />
-          <span class="text-body-2 font-weight-bold text-white">テーマモード</span>
-        </div>
-        <span class="text-caption font-mono text-grey">
-          {{ store.isLight ? '☀️ LIGHT MODE' : '🌙 DARK MODE' }}
+    <!-- Active Theme Mode Banner -->
+    <div class="linear-card pa-2 px-3 d-flex align-center justify-space-between">
+      <div class="d-flex align-center gap-2">
+        <v-icon :icon="store.isLight ? 'mdi-white-balance-sunny' : 'mdi-weather-night'" size="16" :color="store.isLight ? 'warning' : 'primary'" />
+        <span class="text-caption text-white font-weight-bold">
+          現在: {{ store.isLight ? 'ライトモードパレット' : 'ダークモードパレット' }}
         </span>
       </div>
-
-      <div class="theme-mode-toggle-group d-flex align-center">
-        <button
-          id="btn-theme-dark"
-          type="button"
-          class="theme-mode-btn flex-1 d-flex align-center justify-center gap-2"
-          :class="{ 'theme-mode-btn-active': !store.isLight }"
-          @click="handleThemeChange('dark')"
-        >
-          <v-icon icon="mdi-weather-night" size="16" />
-          <span>ダークモード</span>
-        </button>
-
-        <button
-          id="btn-theme-light"
-          type="button"
-          class="theme-mode-btn flex-1 d-flex align-center justify-center gap-2"
-          :class="{ 'theme-mode-btn-active': store.isLight }"
-          @click="handleThemeChange('light')"
-        >
-          <v-icon icon="mdi-white-balance-sunny" size="16" />
-          <span>ライトモード</span>
-        </button>
-      </div>
-
-      <div class="text-caption text-grey mt-2" style="font-size: 0.68rem !important; line-height: 1.3;">
-        ※切り替え時に、選択中の世界観に合わせた推奨パレット（白背景 / 深色背景）を自動セットします。
-      </div>
+      <span class="text-caption text-grey font-mono" style="font-size: 0.68rem !important;">
+        (STEP 1上部で切替可能)
+      </span>
     </div>
 
     <!-- Color Items -->
