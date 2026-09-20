@@ -113,34 +113,25 @@ const categories: ComponentCategory[] = [
 
 <template>
   <div class="components-selector d-flex flex-column gap-3">
-    <!-- Prominent Section Header -->
-    <div class="section-header justify-space-between mb-2">
-      <div class="d-flex align-center gap-2">
-        <span class="step-badge">STEP 4</span>
-        <div class="icon-box">
-          <v-icon icon="mdi-checkbox-multiple-marked-outline" size="16" color="primary" />
-        </div>
-        <h3 class="section-title">実装コンポーネントの対象</h3>
-      </div>
-      <div class="d-flex align-center gap-1">
-        <v-btn
-          size="x-small"
-          variant="tonal"
-          color="primary"
-          class="font-weight-bold"
-          @click="store.setAllComponents(true)"
-        >
-          全選択
-        </v-btn>
-        <v-btn
-          size="x-small"
-          variant="text"
-          color="grey"
-          @click="store.setAllComponents(false)"
-        >
-          全解除
-        </v-btn>
-      </div>
+    <!-- Component Action Toolbar -->
+    <div class="d-flex align-center justify-end gap-1 mb-1">
+      <v-btn
+        size="x-small"
+        variant="tonal"
+        color="primary"
+        class="font-weight-bold"
+        @click="store.setAllComponents(true)"
+      >
+        全選択
+      </v-btn>
+      <v-btn
+        size="x-small"
+        variant="text"
+        color="grey"
+        @click="store.setAllComponents(false)"
+      >
+        全解除
+      </v-btn>
     </div>
 
     <!-- Category Groups -->

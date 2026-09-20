@@ -50,19 +50,7 @@ const colorItems: ColorItemDef[] = [
 
 <template>
   <div class="color-palette-editor d-flex flex-column gap-3">
-    <!-- Prominent Section Header -->
-    <div class="section-header justify-space-between mb-1">
-      <div class="d-flex align-center gap-2">
-        <span class="step-badge">STEP 3</span>
-        <div class="icon-box">
-          <v-icon icon="mdi-palette-outline" size="16" color="primary" />
-        </div>
-        <h3 class="section-title">カラーパレット (Roles & Rules)</h3>
-      </div>
-      <v-chip size="x-small" color="secondary" variant="flat" class="font-weight-bold">
-        役割ごと指定
-      </v-chip>
-    </div>
+
 
     <!-- Active Theme Mode Banner -->
     <div class="linear-card pa-2 px-3 d-flex align-center justify-space-between">

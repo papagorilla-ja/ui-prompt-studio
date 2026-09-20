@@ -22,17 +22,7 @@ const platforms: { value: PlatformType; title: string; icon: string; desc: strin
 
 <template>
   <div class="platform-selector">
-    <!-- Prominent Section Header -->
-    <div class="section-header gap-2 mb-1">
-      <span class="step-badge">STEP 0</span>
-      <div class="icon-box">
-        <v-icon icon="mdi-devices" size="16" color="primary" />
-      </div>
-      <h3 class="section-title">ターゲットアプリ種別</h3>
-    </div>
-    <p class="step-guide-subtext">
-      Webブラウザ向け（レスポンシブWeb/SPA）か、デスクトップ（Tauri/Electron・タイトルバー付き）かを指定します。
-    </p>
+
 
     <v-row dense>
       <v-col v-for="p in platforms" :key="p.value" cols="6">

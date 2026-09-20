@@ -28,22 +28,7 @@ const systems = Object.values(DESIGN_SYSTEMS)
 
 <template>
   <div class="design-system-selector">
-    <!-- Prominent Section Header -->
-    <div class="section-header justify-space-between mb-1">
-      <div class="d-flex align-center gap-2">
-        <span class="step-badge">STEP 1</span>
-        <div class="icon-box">
-          <v-icon icon="mdi-shape-outline" size="16" color="primary" />
-        </div>
-        <h3 class="section-title">デザインシステム・世界観</h3>
-      </div>
-      <v-chip size="x-small" color="primary" variant="flat" class="font-weight-bold">
-        推奨初期値自動適用
-      </v-chip>
-    </div>
-    <p class="step-guide-subtext">
-      アプリ全体のデザイン思想・世界観を決定します。選択時に最適な余白数値と推奨パレットが自動適用されます。
-    </p>
+
 
     <!-- Theme Mode Selector (Dark / Light) Placed prominently at top of STEP 1 -->
     <div class="theme-mode-card linear-card pa-3 mb-3">

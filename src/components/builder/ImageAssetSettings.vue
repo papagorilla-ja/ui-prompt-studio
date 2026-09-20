@@ -53,24 +53,7 @@ function applySuggestion(motif: string) {
 </script>
 
 <template>
-  <div class="linear-card pa-4 mb-4">
-    <!-- Header -->
-    <div class="d-flex align-center justify-space-between mb-3">
-      <div class="d-flex align-center gap-2">
-        <span class="step-badge">STEP 7</span>
-        <h3 class="text-subtitle-2 font-weight-bold text-white tracking-wide">
-          画像アセット指示設定 (外部AI連携)
-        </h3>
-      </div>
-      <span class="text-caption text-secondary font-weight-bold font-mono">
-        {{ currentAsset.targetAi.toUpperCase() }}
-      </span>
-    </div>
-
-    <p class="text-caption text-grey-lighten-1 mb-4 leading-relaxed">
-      UIの世界観・配色と完全に連動した画像素材（アイコン・キービジュアル・キャラ等）を、GeminiやMidjourney等の外部画像AIで生成するためのプロンプトを設定します。
-    </p>
-
+  <div class="image-asset-settings">
     <!-- 1. Asset Type Selection -->
     <div class="mb-4">
       <label class="text-caption font-weight-bold text-grey-lighten-2 d-block mb-2">
