@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { decodeConfigFromHash, copyShareUrlToClipboard } from '@/utils/urlSharing'
 import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 import SandboxStage from '@/components/preview/SandboxStage.vue'
@@ -15,6 +16,42 @@ const snackbar = ref(false)
 const snackbarText = ref('')
 const zoomLevel = ref('100')
 const previewDensity = ref('default')
+const isUrlCopied = ref(false)
+
+function restoreFromHash() {
+  const hash = window.location.hash
+  if (hash && hash.includes('state=')) {
+    const decoded = decodeConfigFromHash(hash)
+    if (decoded) {
+      store.loadConfig(decoded)
+      showNotification(`共有URLから設定を復元しました (${store.currentDesignSystemMeta.name.split('/')[0].trim()} - ${store.isLight ? 'Light' : 'Dark'})`)
+    } else {
+      showNotification('共有URLの解析に失敗しました。デフォルト設定で表示します')
+    }
+  }
+}
+
+onMounted(() => {
+  restoreFromHash()
+  window.addEventListener('hashchange', restoreFromHash)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('hashchange', restoreFromHash)
+})
+
+async function handleShareUrl() {
+  const { success } = await copyShareUrlToClipboard(store.config)
+  if (success) {
+    isUrlCopied.value = true
+    showNotification('共有URLをクリップボードにコピーしました！このリンクを開くと設定がそのまま復元されます')
+    setTimeout(() => {
+      isUrlCopied.value = false
+    }, 2000)
+  } else {
+    showNotification('URLのコピーに失敗しました')
+  }
+}
 const onboardingModalRef = ref<InstanceType<typeof OnboardingModal> | null>(null)
 const styleManagerModalRef = ref<InstanceType<typeof StyleManagerModal> | null>(null)
 
@@ -106,10 +143,12 @@ function handleReset() {
         <button
           type="button"
           class="pro-action-btn pro-action-btn-primary px-3 py-1 d-flex align-center gap-1"
-          @click="showNotification('URL共有 (Issue #7で実装)')"
+          :style="{ background: isUrlCopied ? 'linear-gradient(135deg, #10b981, #059669) !important' : '' }"
+          title="設定全体をURLハッシュに圧縮して共有リンクをコピー"
+          @click="handleShareUrl"
         >
-          <v-icon icon="mdi-share-variant-outline" size="16" />
-          <span>URL共有</span>
+          <v-icon :icon="isUrlCopied ? 'mdi-check' : 'mdi-share-variant-outline'" size="16" />
+          <span>{{ isUrlCopied ? 'URLコピー完了！' : 'URL共有' }}</span>
         </button>
 
         <button
