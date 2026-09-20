@@ -96,7 +96,7 @@ function handleReset() {
         <div>
           <div class="d-flex align-center gap-2">
             <span class="text-subtitle-1 font-weight-black tracking-wide bg-gradient-text">UI Prompt Studio</span>
-            <span class="pro-tag">PRO</span>
+            <span class="free-tag">FREE</span>
           </div>
           <div class="text-caption text-grey" style="font-size: 0.7rem !important; line-height: 1;">
             AIに渡すだけで理想のUIコードを一発生成する指示書スタジオ
@@ -190,7 +190,7 @@ function handleReset() {
             <div class="icon-box" style="width: 26px; height: 26px;">
               <v-icon icon="mdi-tune" size="16" color="primary" />
             </div>
-            <span class="text-subtitle-2 font-weight-bold text-white tracking-wide">DESIGN SPEC BUILDER</span>
+            <span class="text-subtitle-2 font-weight-bold text-white tracking-wide">デザイン・ビルダー</span>
           </div>
           <span class="status-token-badge font-mono">
             READY
@@ -384,15 +384,15 @@ function handleReset() {
   -webkit-text-fill-color: transparent;
 }
 
-.pro-tag {
+.free-tag {
   font-size: 0.65rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   padding: 1px 6px;
   border-radius: 4px;
-  background: linear-gradient(135deg, #6366f1, #38bdf8);
+  background: linear-gradient(135deg, #10b981, #06b6d4);
   color: #ffffff;
-  box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .status-pill-container {

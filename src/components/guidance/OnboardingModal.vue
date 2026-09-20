@@ -147,7 +147,7 @@ defineExpose({
             <div>
               <h4 class="text-subtitle-2 font-weight-bold text-white mb-1 d-flex align-center gap-2">
                 <span>スタイルを選ぶ（左パネル）</span>
-                <span class="badge-sub">STEP 0〜7</span>
+                <span class="badge-sub">STEP 0〜6</span>
               </h4>
               <p class="text-caption text-grey-lighten-1 leading-relaxed mb-0">
                 Webかデスクトップか、ダーク/ライトテーマ、7種のデザインシステム、グリッド余白、配色、出力コードスタック（React, Vue, 単一HTML等）をポチポチ選択します。
@@ -170,15 +170,15 @@ defineExpose({
           </div>
 
           <!-- Step 3 Card -->
-          <div class="step-guide-card step-guide-card-highlight pa-3 d-flex align-start gap-3">
-            <span class="step-huge-num step-huge-num-active">3</span>
+          <div class="step-guide-card pa-3 d-flex align-start gap-3">
+            <span class="step-huge-num">3</span>
             <div>
               <h4 class="text-subtitle-2 font-weight-bold text-white mb-1 d-flex align-center gap-2">
-                <span>プロンプトをコピーしてAIに渡す（右下）</span>
-                <span class="badge-sub-highlight">ONE-CLICK COPY</span>
+                <span>プロンプトをコピーしてAIに渡す（プレビュー上部）</span>
+                <span class="badge-sub">ONE-CLICK COPY</span>
               </h4>
               <p class="text-caption text-grey-lighten-1 leading-relaxed mb-0">
-                右下の「プロンプトをコピー」ボタンを押して、お使いのAI（Claude 3.7 / ChatGPT / Cursor / v0）のチャットにペーストするだけ！完成度の高いフロントエンドコードが出力されます。
+                プレビュー上部の「UI指示書プロンプト」ボタンを押してモーダルを開き、ワンクリックでコピーしてお使いのAI（Claude 3.7 / ChatGPT / Cursor / v0）のチャットにペーストするだけ！完成度の高いフロントエンドコードが出力されます。
               </p>
             </div>
           </div>

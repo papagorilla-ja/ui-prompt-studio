@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue'
 
 const emit = defineEmits<{
-  (e: 'open-guide'): void
   (e: 'open-prompt'): void
 }>()
 
@@ -33,30 +32,19 @@ function toggleCollapse() {
       >
         <v-icon icon="mdi-help-circle-outline" size="14" color="primary" />
         <span class="text-caption font-weight-medium text-grey-lighten-1">
-          使い方ガイド: ① 左で選ぶ ➔ ② 中央で確認 ➔ ③ プロンプトをAIにコピペ
+          ワークフロー: ① 左で選ぶ ➔ ② 中央で確認 ➔ ③ プロンプトをAIにコピペ
         </span>
         <v-icon icon="mdi-chevron-down" size="14" color="grey" />
       </button>
 
-      <div class="d-flex align-center gap-2">
-        <button
-          type="button"
-          class="guide-action-link text-caption d-flex align-center gap-1 font-weight-bold"
-          @click="emit('open-prompt')"
-        >
-          <v-icon icon="mdi-code-tags" size="14" />
-          <span>プロンプトを開く</span>
-        </button>
-
-        <button
-          type="button"
-          class="guide-action-link text-caption d-flex align-center gap-1"
-          @click="emit('open-guide')"
-        >
-          <v-icon icon="mdi-book-open-page-variant-outline" size="14" />
-          <span>詳しい使い方</span>
-        </button>
-      </div>
+      <button
+        type="button"
+        class="guide-action-link text-caption d-flex align-center gap-1 font-weight-bold"
+        @click="emit('open-prompt')"
+      >
+        <v-icon icon="mdi-code-tags" size="14" />
+        <span>プロンプトを開く</span>
+      </button>
     </div>
 
     <!-- Expanded Full Workflow Bar -->
@@ -65,7 +53,7 @@ function toggleCollapse() {
       <div class="d-flex flex-wrap align-center gap-2 flex-grow-1">
         <!-- Badge -->
         <div class="d-flex align-center gap-1-5 mr-1">
-          <span class="guide-flow-badge">HOW TO USE</span>
+          <span class="guide-flow-badge font-mono">HOW TO USE</span>
         </div>
 
         <!-- Step 1 -->
@@ -90,35 +78,26 @@ function toggleCollapse() {
 
         <v-icon icon="mdi-arrow-right" size="14" class="flow-arrow text-grey" />
 
-        <!-- Step 3 (Clickable to open prompt modal) -->
+        <!-- Step 3 (Clickable to open prompt modal, uniform style without highlight) -->
         <button
           type="button"
-          class="flow-step-item flow-step-highlight d-flex align-center gap-2 px-2-5 py-1 text-left cursor-pointer"
+          class="flow-step-item flow-step-clickable d-flex align-center gap-2 px-2-5 py-1 text-left cursor-pointer"
           title="クリックしてプロンプトモーダルを表示"
           @click="emit('open-prompt')"
         >
-          <span class="step-num step-num-highlight">3</span>
+          <span class="step-num">3</span>
           <div>
             <div class="step-title d-flex align-center gap-1">
               <span>AIにコピペ</span>
-              <v-icon icon="mdi-open-in-new" size="11" color="primary" />
+              <v-icon icon="mdi-open-in-new" size="11" color="grey" />
             </div>
             <div class="step-desc">プロンプトをClaude/ChatGPT/Cursorに貼る</div>
           </div>
         </button>
       </div>
 
-      <!-- Right Controls: How-to Button & Collapse -->
-      <div class="d-flex align-center gap-2 flex-shrink-0">
-        <button
-          type="button"
-          class="guide-btn-primary d-flex align-center gap-1 px-3 py-1 text-caption font-weight-bold"
-          @click="emit('open-guide')"
-        >
-          <v-icon icon="mdi-lightbulb-on-outline" size="14" />
-          <span>詳しい使い方・目的</span>
-        </button>
-
+      <!-- Right Controls: Collapse Only (Redundant button removed per Review #7) -->
+      <div class="d-flex align-center flex-shrink-0">
         <button
           type="button"
           class="guide-collapse-btn"
@@ -196,22 +175,19 @@ function toggleCollapse() {
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 6px;
   transition: all 0.2s ease;
-  border: none;
 }
 
 .flow-step-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-.flow-step-highlight {
-  background: rgba(56, 189, 248, 0.08) !important;
-  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+.flow-step-clickable {
+  outline: none;
 }
 
-.flow-step-highlight:hover {
-  background: rgba(56, 189, 248, 0.15) !important;
-  border-color: rgba(56, 189, 248, 0.5) !important;
+.flow-step-clickable:hover {
+  border-color: rgba(99, 102, 241, 0.4);
   transform: translateY(-1px);
 }
 
@@ -230,11 +206,6 @@ function toggleCollapse() {
   flex-shrink: 0;
 }
 
-.step-num-highlight {
-  background: #38bdf8;
-  color: #0f172a;
-}
-
 .step-title {
   font-size: 0.74rem;
   font-weight: 700;
@@ -250,21 +221,6 @@ function toggleCollapse() {
 
 .flow-arrow {
   opacity: 0.5;
-}
-
-.guide-btn-primary {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(56, 189, 248, 0.2));
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  color: #ffffff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.guide-btn-primary:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(56, 189, 248, 0.35));
-  border-color: rgba(99, 102, 241, 0.6);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
 }
 
 .guide-collapse-btn {

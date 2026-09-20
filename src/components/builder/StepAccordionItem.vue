@@ -5,7 +5,6 @@ const props = withDefaults(
     title: string
     icon: string
     guideText?: string
-    summary?: string
     badgeTag?: string
     modelValue?: boolean
   }>(),
@@ -31,40 +30,30 @@ function toggle() {
       class="accordion-header px-4 py-3 d-flex align-center justify-space-between w-100"
       @click="toggle"
     >
-      <div class="d-flex align-center gap-2 overflow-hidden mr-2">
+      <div class="d-flex align-center gap-2 mr-2 flex-grow-1">
         <span class="step-badge">STEP {{ stepNumber }}</span>
         <div class="icon-box">
           <v-icon :icon="icon" size="16" color="primary" />
         </div>
-        <h3 class="section-title text-truncate">{{ title }}</h3>
+        <h3 class="section-title">{{ title }}</h3>
         <v-chip
           v-if="badgeTag"
           size="x-small"
-          color="primary"
+          color="warning"
           variant="flat"
-          class="font-weight-bold ml-1 d-none d-sm-inline-flex"
+          class="font-weight-bold ml-1 font-mono"
         >
           {{ badgeTag }}
         </v-chip>
       </div>
 
-      <div class="d-flex align-center gap-2 flex-shrink-0">
-        <!-- Summary pill showing current selection -->
-        <span
-          v-if="summary"
-          class="step-summary-pill text-truncate font-mono"
-          :title="summary"
-        >
-          {{ summary }}
-        </span>
-        <div class="chevron-box d-flex align-center justify-center">
-          <v-icon
-            icon="mdi-chevron-down"
-            size="18"
-            class="chevron-icon"
-            :class="{ 'chevron-rotated': modelValue }"
-          />
-        </div>
+      <div class="chevron-box d-flex align-center justify-center flex-shrink-0">
+        <v-icon
+          icon="mdi-chevron-down"
+          size="18"
+          class="chevron-icon"
+          :class="{ 'chevron-rotated': modelValue }"
+        />
       </div>
     </button>
 
@@ -82,13 +71,18 @@ function toggle() {
 
 <style scoped>
 .step-accordion-item {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(249, 115, 22, 0.16) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   overflow: hidden;
 }
 
+.step-accordion-item:hover {
+  border-color: rgba(249, 115, 22, 0.35) !important;
+}
+
 .step-accordion-item.is-open {
-  border-color: rgba(99, 102, 241, 0.35);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 15px -3px rgba(99, 102, 241, 0.15);
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 16px -2px rgba(249, 115, 22, 0.2) !important;
 }
 
 .accordion-header {
@@ -104,17 +98,8 @@ function toggle() {
   background-color: rgba(255, 255, 255, 0.035);
 }
 
-.step-summary-pill {
-  font-size: 0.72rem;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 2px 8px;
-  border-radius: 6px;
-  max-width: 170px;
-  display: inline-block;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+.section-title {
+  white-space: nowrap;
 }
 
 .chevron-box {
@@ -131,7 +116,7 @@ function toggle() {
 
 .chevron-rotated {
   transform: rotate(180deg);
-  color: #38bdf8 !important;
+  color: #fb923c !important;
 }
 
 .border-t {
