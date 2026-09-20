@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 
 const emit = defineEmits<{
   (e: 'open-guide'): void
+  (e: 'open-prompt'): void
 }>()
 
 const STORAGE_KEY = 'ui-prompt-studio-guidebar-collapsed-v1'
@@ -37,14 +38,25 @@ function toggleCollapse() {
         <v-icon icon="mdi-chevron-down" size="14" color="grey" />
       </button>
 
-      <button
-        type="button"
-        class="guide-action-link text-caption d-flex align-center gap-1"
-        @click="emit('open-guide')"
-      >
-        <v-icon icon="mdi-book-open-page-variant-outline" size="14" />
-        <span>詳しい使い方</span>
-      </button>
+      <div class="d-flex align-center gap-2">
+        <button
+          type="button"
+          class="guide-action-link text-caption d-flex align-center gap-1 font-weight-bold"
+          @click="emit('open-prompt')"
+        >
+          <v-icon icon="mdi-code-tags" size="14" />
+          <span>プロンプトを開く</span>
+        </button>
+
+        <button
+          type="button"
+          class="guide-action-link text-caption d-flex align-center gap-1"
+          @click="emit('open-guide')"
+        >
+          <v-icon icon="mdi-book-open-page-variant-outline" size="14" />
+          <span>詳しい使い方</span>
+        </button>
+      </div>
     </div>
 
     <!-- Expanded Full Workflow Bar -->
@@ -78,14 +90,22 @@ function toggleCollapse() {
 
         <v-icon icon="mdi-arrow-right" size="14" class="flow-arrow text-grey" />
 
-        <!-- Step 3 -->
-        <div class="flow-step-item flow-step-highlight d-flex align-center gap-2 px-2-5 py-1">
+        <!-- Step 3 (Clickable to open prompt modal) -->
+        <button
+          type="button"
+          class="flow-step-item flow-step-highlight d-flex align-center gap-2 px-2-5 py-1 text-left cursor-pointer"
+          title="クリックしてプロンプトモーダルを表示"
+          @click="emit('open-prompt')"
+        >
           <span class="step-num step-num-highlight">3</span>
           <div>
-            <div class="step-title">AIにコピペ</div>
+            <div class="step-title d-flex align-center gap-1">
+              <span>AIにコピペ</span>
+              <v-icon icon="mdi-open-in-new" size="11" color="primary" />
+            </div>
             <div class="step-desc">プロンプトをClaude/ChatGPT/Cursorに貼る</div>
           </div>
-        </div>
+        </button>
       </div>
 
       <!-- Right Controls: How-to Button & Collapse -->
@@ -176,6 +196,7 @@ function toggleCollapse() {
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 6px;
   transition: all 0.2s ease;
+  border: none;
 }
 
 .flow-step-item:hover {
@@ -184,8 +205,14 @@ function toggleCollapse() {
 }
 
 .flow-step-highlight {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.08) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+.flow-step-highlight:hover {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  transform: translateY(-1px);
 }
 
 .step-num {

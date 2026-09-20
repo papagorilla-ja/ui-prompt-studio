@@ -15,8 +15,8 @@ const store = useConfigStore()
 
 // Accordion open states (STEP 1: Design System is open by default)
 const openSteps = ref<Record<string, boolean>>({
-  step0: false,
-  step1: true,
+  step0: true,
+  step1: false,
   step2: false,
   step3: false,
   step4: false,
