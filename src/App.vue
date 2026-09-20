@@ -4,7 +4,7 @@ import { decodeConfigFromHash, copyShareUrlToClipboard } from '@/utils/urlSharin
 import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 import SandboxStage from '@/components/preview/SandboxStage.vue'
-import PromptViewer from '@/components/prompt/PromptViewer.vue'
+import PromptModal from '@/components/prompt/PromptModal.vue'
 import WorkflowGuideBar from '@/components/guidance/WorkflowGuideBar.vue'
 import OnboardingModal from '@/components/guidance/OnboardingModal.vue'
 import StyleManagerModal from '@/components/presets/StyleManagerModal.vue'
@@ -17,6 +17,7 @@ const snackbarText = ref('')
 const zoomLevel = ref('100')
 const previewDensity = ref('default')
 const isUrlCopied = ref(false)
+const isPromptModalOpen = ref(false)
 const isMobile = ref(false)
 const mobileActiveTab = ref<'builder' | 'preview' | 'prompt'>('builder')
 
@@ -172,7 +173,7 @@ function handleReset() {
     </header>
 
     <!-- Workflow Guide Bar (Issue #28) -->
-    <WorkflowGuideBar @open-guide="openGuide" />
+    <WorkflowGuideBar @open-guide="openGuide" @open-prompt="isPromptModalOpen = true" />
 
     <!-- Studio Main Body (Responsive) -->
     <main class="studio-body" :class="{ 'mobile-layout': isMobile }">
@@ -265,24 +266,26 @@ function handleReset() {
                   {{ z }}%
                 </button>
               </div>
+
+              <span style="width: 1px; height: 14px; background: rgba(255,255,255,0.15);"></span>
+
+              <!-- Prominent UI Code Prompt Button -->
+              <button
+                type="button"
+                class="open-prompt-modal-btn d-flex align-center gap-1 px-3 py-1"
+                title="AIフロントエンド指示プロンプトを表示・コピー"
+                @click="isPromptModalOpen = true"
+              >
+                <v-icon icon="mdi-code-tags" size="15" color="primary" />
+                <span>UI指示書プロンプト</span>
+              </button>
             </div>
           </div>
 
-          <!-- Interactive Sandbox Stage -->
+          <!-- Interactive Sandbox Stage (Full Height) -->
           <div class="flex-1 overflow-hidden d-flex flex-column">
             <SandboxStage :zoom="zoomLevel" :density="previewDensity" />
           </div>
-        </div>
-
-        <!-- Bottom: Prompt Output (Linear Pro Style) -->
-        <div
-          class="studio-prompt-section"
-          :class="{
-            'mobile-hidden': isMobile && mobileActiveTab !== 'prompt',
-            'mobile-full-height': isMobile && mobileActiveTab === 'prompt'
-          }"
-        >
-          <PromptViewer @notify="showNotification" />
         </div>
       </section>
     </main>
@@ -312,13 +315,16 @@ function handleReset() {
       <button
         type="button"
         class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-4"
-        :class="{ 'mobile-nav-btn-active': mobileActiveTab === 'prompt' }"
-        @click="mobileActiveTab = 'prompt'"
+        :class="{ 'mobile-nav-btn-active': isPromptModalOpen }"
+        @click="isPromptModalOpen = true"
       >
         <v-icon icon="mdi-code-tags" size="18" />
         <span class="mobile-nav-text">プロンプト</span>
       </button>
     </nav>
+
+    <!-- Prompt Modal (Issue #35) -->
+    <PromptModal v-model="isPromptModalOpen" @notify="showNotification" />
 
     <!-- Onboarding Guide Modal (Issue #28) -->
     <OnboardingModal ref="onboardingModalRef" />
