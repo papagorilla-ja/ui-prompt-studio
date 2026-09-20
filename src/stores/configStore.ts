@@ -41,6 +41,7 @@ export const useConfigStore = defineStore('config', () => {
       '--ui-radius': `${rules.borderRadius}px`,
       '--ui-gap': `${rules.gap}px`,
       '--ui-padding': `${rules.padding}px`,
+      '--ui-button-gap': `${rules.buttonGap ?? 10}px`,
       '--ui-border-width': `${rules.borderWidth}px`,
       '--ui-h1-size': rules.h1Size,
       '--ui-h1-weight': rules.h1Weight.toString(),

@@ -56,7 +56,7 @@ const store = useConfigStore()
     </div>
 
     <!-- Action Buttons -->
-    <div v-if="store.config.components.actionButtons" class="d-flex align-center justify-end gap-2 pt-2 border-t" style="border-color: rgba(255,255,255,0.06) !important;">
+    <div v-if="store.config.components.actionButtons" class="sandbox-actions-row pt-2 border-t" style="border-color: rgba(255,255,255,0.06) !important;">
       <button type="button" class="sandbox-btn sandbox-btn-secondary">
         キャンセル
       </button>

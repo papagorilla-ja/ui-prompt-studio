@@ -351,6 +351,13 @@
   border-color: var(--ui-accent);
 }
 
+.sandbox-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-button-gap, 10px);
+}
+
 .sandbox-btn {
   display: inline-flex;
   align-items: center;

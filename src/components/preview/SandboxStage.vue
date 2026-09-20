@@ -33,6 +33,7 @@ const cssVariables = computed(() => ({
   '--ui-radius': `${store.config.rules.borderRadius}px`,
   '--ui-padding': `${store.config.rules.padding}px`,
   '--ui-gap': `${store.config.rules.gap}px`,
+  '--ui-button-gap': `${store.config.rules.buttonGap ?? 10}px`,
   '--ui-border-width': `${store.config.rules.borderWidth}px`,
 }))
 

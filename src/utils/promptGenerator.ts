@@ -113,6 +113,7 @@ ${windowFeatures}
 - コンポーネント内側余白 (padding): ${config.rules.padding}px 一律
 - 角丸の半径 (border-radius): ${config.rules.borderRadius}px 一律
 - 境界線の太さ (border-width): ${config.rules.borderWidth}px
+- ボタン・アクション間隔 (button-gap): ${config.rules.buttonGap ?? 10}px (アクションボタン間の適切な余白)
 - タイポグラフィ比率:
   - 見出し (h1): ${config.rules.h1Size} / font-weight: ${config.rules.h1Weight} (Bold)
   - 本文 (body): ${config.rules.bodySize} / font-weight: 400 (Regular)

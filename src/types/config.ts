@@ -19,6 +19,7 @@ export interface RulesConfig {
   padding: number       // 内側余白 (px)
   borderRadius: number  // 角丸半径 (px: 0, 4, 8, 12, 16, 24, 32, 9999)
   borderWidth: number   // 境界線幅 (px: 0, 1, 2, 3)
+  buttonGap: number     // ボタン・アクション間隔 (px: 4-24)
   h1Size: string        // 見出しサイズ (例: "3.5rem" / "56px")
   h1Weight: number      // 見出しウェイト (例: 800)
   bodySize: string      // 本文サイズ (例: "1rem" / "16px")

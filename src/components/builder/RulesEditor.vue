@@ -86,6 +86,26 @@ const h1WeightOptions = [
       />
     </div>
 
+    <!-- 2.5 Button Gap (ボタン間隔) -->
+    <div class="linear-card pa-3">
+      <div class="d-flex align-center justify-space-between mb-1">
+        <span class="text-body-2 font-weight-bold text-white">ボタン・アクション間隔 (buttonGap)</span>
+        <v-chip size="x-small" color="primary" variant="flat" class="font-mono font-weight-bold">
+          {{ store.config.rules.buttonGap ?? 10 }}px
+        </v-chip>
+      </div>
+      <div class="text-caption text-grey mb-2">アクションボタン同士の隙間。誤操作防止と視覚的リズムを調整</div>
+      <v-slider
+        v-model="store.config.rules.buttonGap"
+        :min="4"
+        :max="24"
+        :step="2"
+        color="primary"
+        hide-details
+        density="compact"
+      />
+    </div>
+
     <!-- 3. Border Radius -->
     <div class="linear-card pa-3">
       <div class="d-flex align-center justify-space-between mb-1">
