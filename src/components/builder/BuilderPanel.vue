@@ -5,6 +5,7 @@ import RulesEditor from './RulesEditor.vue'
 import ColorPaletteEditor from './ColorPaletteEditor.vue'
 import ComponentsSelector from './ComponentsSelector.vue'
 import TechStackAndPurpose from './TechStackAndPurpose.vue'
+import ImageAssetSettings from './ImageAssetSettings.vue'
 </script>
 
 <template>
@@ -36,6 +37,11 @@ import TechStackAndPurpose from './TechStackAndPurpose.vue'
 
     <!-- 5 & 6. Tech Stack & Purpose -->
     <TechStackAndPurpose />
+
+    <v-divider class="my-1 border-opacity-25" />
+
+    <!-- 7. Image Asset Prompt Generator -->
+    <ImageAssetSettings />
   </div>
 </template>
 
