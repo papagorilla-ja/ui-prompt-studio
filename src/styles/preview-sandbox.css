@@ -448,3 +448,59 @@
   border: 1px solid rgba(255, 255, 255, 0.9) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 24px rgba(0, 0, 0, 0.06) !important;
 }
+
+/* ==========================================================================
+   Kawaii & Pop Specialization
+   ========================================================================== */
+.ui-preview-sandbox.system-kawaii {
+  box-shadow: 0 20px 40px rgba(244, 114, 182, 0.15) !important;
+}
+
+.ui-preview-sandbox.system-kawaii .sandbox-card {
+  box-shadow: 0 8px 24px rgba(244, 114, 182, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  border-radius: var(--ui-radius) !important;
+}
+
+.ui-preview-sandbox.system-kawaii .sandbox-btn-accent {
+  box-shadow: 0 6px 18px rgba(244, 114, 182, 0.4) !important;
+  border-radius: 9999px !important;
+}
+
+.ui-preview-sandbox.system-kawaii .sandbox-btn-secondary {
+  border-radius: 9999px !important;
+}
+
+.ui-preview-sandbox.system-kawaii .sandbox-input {
+  border-radius: 12px !important;
+}
+
+/* ==========================================================================
+   Web Gaming & Arcade Specialization
+   ========================================================================== */
+.ui-preview-sandbox.system-gaming {
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.1) !important;
+}
+
+.ui-preview-sandbox.system-gaming .sandbox-card {
+  box-shadow: inset 0 0 8px rgba(0, 229, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+  border-radius: 2px !important;
+}
+
+.ui-preview-sandbox.system-gaming .sandbox-btn-accent {
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.6) !important;
+  border-radius: 2px !important;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ui-preview-sandbox.system-gaming .sandbox-btn-secondary {
+  border-radius: 2px !important;
+  font-family: var(--font-mono);
+}
+
+.ui-preview-sandbox.system-gaming .sandbox-input {
+  border-radius: 2px !important;
+  font-family: var(--font-mono);
+  background: rgba(0, 0, 0, 0.5) !important;
+}

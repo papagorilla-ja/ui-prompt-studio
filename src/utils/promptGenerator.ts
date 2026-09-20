@@ -28,6 +28,10 @@ export function generatePrompt(config: AppConfig, meta: DesignSystemMeta): strin
       '磨りガラスのような透過背景（backdrop-filter: blur）と、微細な1pxホワイトボーダー・インナーシャドウが生み出す多層的な奥行きと浮遊感を演出してください。',
     brutalism:
       '余計なぼかし影やグラデーションを排除し、明確な黒ボーダーとソリッドな高コントラストで表現するタクタイル・ブルータリズム。角丸は0px、無駄のないソリッドな美学を維持してください。',
+    kawaii:
+      'ぷっくりとした大きな角丸、柔らかなソフトドロップシャドウ、パステルカラー（ピンク・ミント・ラベンダー）が織りなすキュートで親しみやすい世界観。バブル感のあるピル型ボタンや愛らしいマイクロインタラクションを意識してください。',
+    gaming:
+      '8bit/16bitレトロアーケードやサイバーパンクゲームのHUD・ダッシュボード。直角（ほぼ0px角丸）、発光するネオングロー、ピクセル的枠線、HP/MP風ゲージやゲームスコアを連想させる高揚感のあるインターフェースを構築してください。',
   }
 
   const guide = systemGuidelines[config.designSystem] || meta.description

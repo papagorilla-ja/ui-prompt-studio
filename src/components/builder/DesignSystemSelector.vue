@@ -8,6 +8,8 @@ import brutalismImg from '@/assets/images/ds-brutalism.jpg'
 import minimalImg from '@/assets/images/ds-minimal.jpg'
 import retroImg from '@/assets/images/ds-retrofuturistic.jpg'
 import glassImg from '@/assets/images/ds-glassmorphism.jpg'
+import kawaiiImg from '@/assets/images/ds-kawaii.jpg'
+import gamingImg from '@/assets/images/ds-gaming.jpg'
 
 const store = useConfigStore()
 
@@ -17,6 +19,8 @@ const systemImages: Record<DesignSystemType, string> = {
   minimal: minimalImg,
   retrofuturistic: retroImg,
   glassmorphism: glassImg,
+  kawaii: kawaiiImg,
+  gaming: gamingImg,
 }
 
 const systems = Object.values(DESIGN_SYSTEMS)
