@@ -17,6 +17,12 @@ const snackbarText = ref('')
 const zoomLevel = ref('100')
 const previewDensity = ref('default')
 const isUrlCopied = ref(false)
+const isMobile = ref(false)
+const mobileActiveTab = ref<'builder' | 'preview' | 'prompt'>('builder')
+
+function checkMobile() {
+  isMobile.value = window.innerWidth <= 768
+}
 
 function restoreFromHash() {
   const hash = window.location.hash
@@ -32,11 +38,14 @@ function restoreFromHash() {
 }
 
 onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
   restoreFromHash()
   window.addEventListener('hashchange', restoreFromHash)
 })
 
 onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
   window.removeEventListener('hashchange', restoreFromHash)
 })
 
@@ -165,10 +174,16 @@ function handleReset() {
     <!-- Workflow Guide Bar (Issue #28) -->
     <WorkflowGuideBar @open-guide="openGuide" />
 
-    <!-- Studio Main 2-Pane Body -->
-    <main class="studio-body">
+    <!-- Studio Main Body (Responsive) -->
+    <main class="studio-body" :class="{ 'mobile-layout': isMobile }">
       <!-- Left Pane: Settings & Builder -->
-      <section class="studio-left-pane">
+      <section
+        class="studio-left-pane"
+        :class="{
+          'mobile-hidden': isMobile && mobileActiveTab !== 'builder',
+          'mobile-active-pane': isMobile && mobileActiveTab === 'builder'
+        }"
+      >
         <div class="left-pane-header px-4 py-3 border-b d-flex align-center justify-space-between sticky-header">
           <div class="d-flex align-center gap-2">
             <div class="icon-box" style="width: 26px; height: 26px;">
@@ -185,9 +200,21 @@ function handleReset() {
       </section>
 
       <!-- Right Pane: Preview (Top) & Prompt (Bottom) -->
-      <section class="studio-right-pane">
+      <section
+        class="studio-right-pane"
+        :class="{
+          'mobile-hidden': isMobile && mobileActiveTab === 'builder',
+          'mobile-active-pane': isMobile && mobileActiveTab !== 'builder'
+        }"
+      >
         <!-- Top: Sandbox Preview with Dot Grid Canvas -->
-        <div class="studio-preview-section dot-grid-canvas">
+        <div
+          class="studio-preview-section dot-grid-canvas"
+          :class="{
+            'mobile-hidden': isMobile && mobileActiveTab !== 'preview',
+            'mobile-full-height': isMobile && mobileActiveTab === 'preview'
+          }"
+        >
           <!-- Floating Toolbar -->
           <div class="preview-toolbar-overlay d-flex align-center justify-space-between px-4 py-3">
             <div class="d-flex align-center gap-2">
@@ -248,11 +275,50 @@ function handleReset() {
         </div>
 
         <!-- Bottom: Prompt Output (Linear Pro Style) -->
-        <div class="studio-prompt-section">
+        <div
+          class="studio-prompt-section"
+          :class="{
+            'mobile-hidden': isMobile && mobileActiveTab !== 'prompt',
+            'mobile-full-height': isMobile && mobileActiveTab === 'prompt'
+          }"
+        >
           <PromptViewer @notify="showNotification" />
         </div>
       </section>
     </main>
+
+    <!-- Mobile Bottom Navigation Bar (Issue #8) -->
+    <nav v-if="isMobile" class="mobile-bottom-nav d-flex align-center justify-space-around">
+      <button
+        type="button"
+        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-4"
+        :class="{ 'mobile-nav-btn-active': mobileActiveTab === 'builder' }"
+        @click="mobileActiveTab = 'builder'"
+      >
+        <v-icon icon="mdi-tune" size="18" />
+        <span class="mobile-nav-text">デザイン設定</span>
+      </button>
+
+      <button
+        type="button"
+        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-4"
+        :class="{ 'mobile-nav-btn-active': mobileActiveTab === 'preview' }"
+        @click="mobileActiveTab = 'preview'"
+      >
+        <v-icon icon="mdi-eye-outline" size="18" />
+        <span class="mobile-nav-text">プレビュー</span>
+      </button>
+
+      <button
+        type="button"
+        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-4"
+        :class="{ 'mobile-nav-btn-active': mobileActiveTab === 'prompt' }"
+        @click="mobileActiveTab = 'prompt'"
+      >
+        <v-icon icon="mdi-code-tags" size="18" />
+        <span class="mobile-nav-text">プロンプト</span>
+      </button>
+    </nav>
 
     <!-- Onboarding Guide Modal (Issue #28) -->
     <OnboardingModal ref="onboardingModalRef" />
