@@ -4,6 +4,8 @@ import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 import SandboxStage from '@/components/preview/SandboxStage.vue'
 import PromptViewer from '@/components/prompt/PromptViewer.vue'
+import WorkflowGuideBar from '@/components/guidance/WorkflowGuideBar.vue'
+import OnboardingModal from '@/components/guidance/OnboardingModal.vue'
 import appLogo from '@/assets/images/logo.jpg'
 
 const store = useConfigStore()
@@ -12,6 +14,11 @@ const snackbar = ref(false)
 const snackbarText = ref('')
 const zoomLevel = ref('100')
 const previewDensity = ref('default')
+const onboardingModalRef = ref<InstanceType<typeof OnboardingModal> | null>(null)
+
+function openGuide() {
+  onboardingModalRef.value?.open()
+}
 
 function showNotification(text: string) {
   snackbarText.value = text
@@ -39,7 +46,7 @@ function handleReset() {
             <span class="pro-tag">PRO</span>
           </div>
           <div class="text-caption text-grey" style="font-size: 0.7rem !important; line-height: 1;">
-            AIフロントエンド指示プロンプト生成スタジオ
+            AIに渡すだけで理想のUIコードを一発生成する指示書スタジオ
           </div>
         </div>
       </div>
@@ -58,6 +65,15 @@ function handleReset() {
 
       <!-- Right: Action Buttons -->
       <div class="d-flex align-center gap-2">
+        <button
+          type="button"
+          class="pro-action-btn pro-action-btn-guide px-3 py-1 d-flex align-center gap-1"
+          title="使い方・目的の解説ガイドを開く"
+          @click="openGuide"
+        >
+          <v-icon icon="mdi-help-circle-outline" size="16" color="warning" />
+          <span class="font-weight-bold text-white">使い方</span>
+        </button>
         <button
           type="button"
           class="pro-action-btn px-3 py-1 d-flex align-center gap-1"
@@ -96,6 +112,9 @@ function handleReset() {
       </div>
     </header>
 
+    <!-- Workflow Guide Bar (Issue #28) -->
+    <WorkflowGuideBar @open-guide="openGuide" />
+
     <!-- Studio Main 2-Pane Body -->
     <main class="studio-body">
       <!-- Left Pane: Settings & Builder -->
@@ -122,7 +141,14 @@ function handleReset() {
           <!-- Floating Toolbar -->
           <div class="preview-toolbar-overlay d-flex align-center justify-space-between px-4 py-3">
             <div class="d-flex align-center gap-2">
-              <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center"><v-icon icon="mdi-eye-outline" size="16" class="mr-2" color="secondary" />リアルタイム・サンドボックスプレビュー</div>
+              <div class="text-caption font-weight-bold text-grey-lighten-1 d-flex align-center">
+                <v-icon icon="mdi-eye-outline" size="16" class="mr-2" color="secondary" />
+                <span>リアルタイム・サンドボックスプレビュー</span>
+              </div>
+              <span class="preview-sync-hint d-none d-lg-inline-flex align-center gap-1 font-mono">
+                <v-icon icon="mdi-arrow-left-bold" size="12" color="primary" />
+                <span>左パネルの変更がリアルタイム反映</span>
+              </span>
             </div>
 
             <!-- Floating Pill Controls -->
@@ -177,6 +203,9 @@ function handleReset() {
         </div>
       </section>
     </main>
+
+    <!-- Onboarding Guide Modal (Issue #28) -->
+    <OnboardingModal ref="onboardingModalRef" />
 
     <!-- Global Snackbar -->
     <v-snackbar v-model="snackbar" timeout="2500" color="primary" location="bottom right">
@@ -287,6 +316,26 @@ function handleReset() {
 .pill-btn:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.06);
+}
+
+.pro-action-btn-guide {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+.pro-action-btn-guide:hover {
+  background: rgba(245, 158, 11, 0.22) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+.preview-sync-hint {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 1px 8px;
 }
 
 .pill-btn-active {

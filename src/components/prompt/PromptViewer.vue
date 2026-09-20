@@ -121,6 +121,12 @@ function openExternalAI() {
         </button>
       </div>
 
+      <!-- Contextual CTA Hint (Issue #28) -->
+      <div v-if="activeTab === 'ui-code'" class="d-none d-xl-flex align-center gap-1 cta-hint-pill">
+        <v-icon icon="mdi-content-paste" size="13" color="primary" />
+        <span>コピーして Claude / ChatGPT / Cursor 等に貼るだけ</span>
+      </div>
+
       <!-- Action Buttons -->
       <div class="d-flex align-center gap-2">
         <template v-if="activeTab === 'ui-code'">
@@ -259,6 +265,16 @@ function openExternalAI() {
 .gap-3 { gap: 12px; }
 .leading-relaxed { line-height: 1.5; }
 .font-mono { font-family: var(--font-mono); }
+
+.cta-hint-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 12px;
+  padding: 3px 10px;
+}
 
 .prompt-viewer-container {
   box-sizing: border-box;
