@@ -5,6 +5,7 @@ import { useConfigStore } from '@/stores/configStore'
 import BuilderPanel from '@/components/builder/BuilderPanel.vue'
 import SandboxStage from '@/components/preview/SandboxStage.vue'
 import PromptModal from '@/components/prompt/PromptModal.vue'
+import ImagePromptModal from '@/components/prompt/ImagePromptModal.vue'
 import WorkflowGuideBar from '@/components/guidance/WorkflowGuideBar.vue'
 import OnboardingModal from '@/components/guidance/OnboardingModal.vue'
 import StyleManagerModal from '@/components/presets/StyleManagerModal.vue'
@@ -18,6 +19,7 @@ const zoomLevel = ref('100')
 const previewDensity = ref('default')
 const isUrlCopied = ref(false)
 const isPromptModalOpen = ref(false)
+const isImageModalOpen = ref(false)
 const isMobile = ref(false)
 const mobileActiveTab = ref<'builder' | 'preview' | 'prompt'>('builder')
 
@@ -279,6 +281,17 @@ function handleReset() {
                 <v-icon icon="mdi-code-tags" size="15" color="primary" />
                 <span>UI指示書プロンプト</span>
               </button>
+
+              <!-- Prominent Image Prompt Button (Issue #36) -->
+              <button
+                type="button"
+                class="open-image-modal-btn d-flex align-center gap-1 px-3 py-1"
+                title="画像アセット生成プロンプト（Nano Banana Pro / Midjourney等）を生成・カスタマイズ"
+                @click="isImageModalOpen = true"
+              >
+                <v-icon icon="mdi-image-sparkles" size="15" color="warning" />
+                <span>画像プロンプト生成</span>
+              </button>
             </div>
           </div>
 
@@ -314,17 +327,30 @@ function handleReset() {
 
       <button
         type="button"
-        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-4"
+        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-3"
         :class="{ 'mobile-nav-btn-active': isPromptModalOpen }"
         @click="isPromptModalOpen = true"
       >
         <v-icon icon="mdi-code-tags" size="18" />
-        <span class="mobile-nav-text">プロンプト</span>
+        <span class="mobile-nav-text">UI指示書</span>
+      </button>
+
+      <button
+        type="button"
+        class="mobile-nav-btn d-flex flex-column align-center gap-1 py-1 px-3"
+        :class="{ 'mobile-nav-btn-active': isImageModalOpen }"
+        @click="isImageModalOpen = true"
+      >
+        <v-icon icon="mdi-image-sparkles" size="18" color="warning" />
+        <span class="mobile-nav-text">画像生成</span>
       </button>
     </nav>
 
     <!-- Prompt Modal (Issue #35) -->
     <PromptModal v-model="isPromptModalOpen" @notify="showNotification" />
+
+    <!-- Image Prompt Modal (Issue #36) -->
+    <ImagePromptModal v-model="isImageModalOpen" @notify="showNotification" />
 
     <!-- Onboarding Guide Modal (Issue #28) -->
     <OnboardingModal ref="onboardingModalRef" />

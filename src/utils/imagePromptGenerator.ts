@@ -137,12 +137,13 @@ export function generateImageAssetPrompt(config: AppConfig): GeneratedImagePromp
       break
 
     case 'gemini':
-      fullPrompt = `Generate a high-quality ${asset.assetType.replace('-', ' ')} featuring: ${motif}.
-Style and Aesthetics: ${aesthetic.keywords}, ${aesthetic.medium}.
-Lighting & Atmosphere: ${aesthetic.lighting}, ${themeHint}.
-Composition: ${assetMeta.composition}.
-Color Scheme: ${colorPalettePrompt}.
-No text, no watermarks, professional UI design asset ready for production.`
+      fullPrompt = `Generate a high-fidelity production-ready ${asset.assetType.replace('-', ' ')} using Google Nano Banana:
+Subject/Theme: ${motif}
+Visual Style: ${aesthetic.keywords}, ${aesthetic.medium}
+Lighting & Atmosphere: ${aesthetic.lighting}, ${themeHint}
+Composition & Framing: ${assetMeta.composition}, ${assetMeta.framing}
+Color Harmony: ${colorPalettePrompt}
+Quality: ultra-sharp 4K fidelity, pristine surface textures, clean studio background, no text, no watermarks, ready for UI implementation.`
       break
 
     case 'dalle3':
@@ -161,10 +162,10 @@ Do not include any text, letters, UI buttons, or words in the image.`
   }
 
   const targetNames: Record<TargetImageAI, string> = {
-    gemini: 'Google Gemini (Imagen 3)',
-    midjourney: 'Midjourney v6',
-    dalle3: 'DALL-E 3 (ChatGPT)',
-    'stable-diffusion': 'Stable Diffusion / FLUX',
+    gemini: 'Google Gemini (Nano Banana Pro / Nano Banana 2)',
+    midjourney: 'Midjourney v6.1 / Niji 6',
+    dalle3: 'DALL-E 3 (ChatGPT Plus)',
+    'stable-diffusion': 'Stable Diffusion 3.5 Large / FLUX',
   }
 
   const explanationJa = `選択中のデザインシステム「${designSystem}」の美術様式およびカラーパレット（アクセント: ${colors.accent}）と調和するよう自動構成されたプロンプトです。`
