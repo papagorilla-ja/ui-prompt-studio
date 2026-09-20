@@ -77,26 +77,31 @@ export function generatePrompt(config: AppConfig, meta: DesignSystemMeta): strin
     ? compItems.join('\n')
     : '- 必要最小限のメインコンテンツカードおよびコンテナ'
 
-  // 4. Tech Stack Quality Guidelines
-  const stackGuidelines: Record<string, string> = {
-    'React (TSX) + TailwindCSS':
-      '- TypeScript型安全性を徹底し、TailwindCSSユーティリティクラス（カスタム値は角括弧またはテーマ拡張で対応）を用いてモジュール分割されたクリーンなReactコンポーネントを出力してください。\n- アイコンには Lucide React または Heroicons を使用してください。',
-    'Vue 3 (SFC) + TailwindCSS':
-      '- Vue 3 Composition API (`<script setup lang="ts">`) を採用し、TailwindCSSを用いて単一ファイルコンポーネント (SFC) として出力してください。\n- リアクティブな状態管理は `ref` / `computed` を活用してください。',
-    'Vanilla HTML + Modern CSS + JS':
-      '- 外部フレームワークに依存せず、セマンティックなHTML5、CSSカスタムプロパティ（CSS変数）、モダンなCSS Grid / Flexbox、素のJavaScriptのみで完結する堅牢なコードを出力してください。',
-    'Next.js (App Router) + TailwindCSS':
-      '- Next.js App Router (Server Components / Client Components `"use client"` の適切な分離) に準拠し、TailwindCSSを用いた本番グレードの構成を出力してください。',
-    'SvelteKit + TailwindCSS':
-      '- SvelteKitの軽量でリアクティブなコンポーネント構造とTailwindCSSを組み合わせ、無駄のないエレガントなコードを出力してください。',
-    'Flutter (Dart)':
-      '- Flutterのウィジェットツリー（StatelessWidget / StatefulWidget）に落とし込み、`ThemeData` や `BoxDecoration` を駆使して指定の数値ルール・配色を正確に再現してください。',
-    'SwiftUI (macOS/iOS)':
-      '- SwiftUIの宣言的構文で記述し、`View` プロトコルに準拠したクリーンな構造、`Color` アセット指定、角丸や余白を再現してください。',
+  // 4. Tech Stack Quality Guidelines & Labels
+  const stackLabels: Record<string, string> = {
+    'react-tailwind': 'React (TSX) + TailwindCSS',
+    'vue-tailwind': 'Vue 3 (SFC) + TailwindCSS',
+    'html-vanilla': 'HTML5 + Vanilla CSS + JavaScript',
+    'html-single-file': '単一HTML完結 (Single-file HTML / GAS・ローカル即時実行向け)',
+    'nextjs-shadcn': 'Next.js (App Router) + shadcn/ui',
   }
 
+  const stackGuidelines: Record<string, string> = {
+    'react-tailwind':
+      '- TypeScript型安全性を徹底し、TailwindCSSユーティリティクラス（カスタム値は角括弧またはテーマ拡張で対応）を用いてモジュール分割されたクリーンなReactコンポーネントを出力してください。\n- アイコンには Lucide React または Heroicons を使用してください。',
+    'vue-tailwind':
+      '- Vue 3 Composition API (`<script setup lang="ts">`) を採用し、TailwindCSSを用いて単一ファイルコンポーネント (SFC) として出力してください。\n- リアクティブな状態管理は `ref` / `computed` を活用してください。',
+    'html-vanilla':
+      '- 外部フレームワークに依存せず、セマンティックなHTML5、CSSカスタムプロパティ（CSS変数）、モダンなCSS Grid / Flexbox、素のJavaScriptのみで完結する堅牢なコードを出力してください。',
+    'html-single-file':
+      '- ビルドツール（npm/Vite/Webpack等）を一切使用せず、ブラウザで直接開く（file://）だけで動作する単一の .html ファイルとして完結したコードを出力してください。\n- 外部ファイルへの分離は禁止です。スタイルは `<style>` タグ内にCSS変数・Grid/Flexboxを用いてインライン記述し、スクリプトは `<script>` タグ内に純粋なJavaScriptで記述してください。\n- Google Apps Script (HTML Service / `HtmlService.createHtmlOutputFromFile`) のエディタにそのまま貼り付けて動作する設計とし、サーバー側関数呼び出し（`google.script.run`）との連携が容易な構造にしてください。\n- 外部ライブラリが必要な場合は、ビルド不要なCDNリンク（例: TailwindCSS CDN `<script src="https://cdn.tailwindcss.com"></script>` や Google Fonts 等）のみを `<head>` で読み込んでください。',
+    'nextjs-shadcn':
+      '- Next.js App Router (Server Components / Client Components `"use client"` の適切な分離) に準拠し、TailwindCSSおよびshadcn/uiのコンポーネント設計を取り入れた本番グレードの構成を出力してください。',
+  }
+
+  const stackDisplay = stackLabels[config.outputTechStack] || config.outputTechStack
   const stackGuide = stackGuidelines[config.outputTechStack] ||
-    `- 指定の技術スタック（${config.outputTechStack}）の最新ベストプラクティスに則り、保守性の高いコードを出力してください。`
+    `- 指定の技術スタック（${stackDisplay}）の最新ベストプラクティスに則り、保守性の高いコードを出力してください。`
 
   // 5. Construct Markdown Output
   return `# UI実装指示プロンプト
@@ -104,7 +109,7 @@ export function generatePrompt(config: AppConfig, meta: DesignSystemMeta): strin
 ## 1. アプリケーション概要
 - ターゲット種別: ${platformName}
 - 目的・機能: ${config.customPurpose || '洗練されたモダンUIアプリケーション'}
-- 実装コードスタック: ${config.outputTechStack}
+- 実装コードスタック: ${stackDisplay}
 ${windowFeatures}
 
 ## 2. デザインシステム・世界観
