@@ -8,7 +8,6 @@ import ColorPaletteEditor from './ColorPaletteEditor.vue'
 import ComponentsSelector from './ComponentsSelector.vue'
 import TechStackSelector from './TechStackSelector.vue'
 import PurposeEditor from './PurposeEditor.vue'
-import ImageAssetSettings from './ImageAssetSettings.vue'
 
 // Accordion open states (STEP 0: Platform is open by default)
 const openSteps = ref<Record<string, boolean>>({
@@ -19,7 +18,6 @@ const openSteps = ref<Record<string, boolean>>({
   step4: false,
   step5: false,
   step6: false,
-  step7: false,
 })
 
 const openCount = computed(() => {
@@ -46,7 +44,7 @@ function collapseAll() {
       <div class="d-flex align-center gap-2">
         <span class="text-caption text-grey font-weight-medium">ステップ設定</span>
         <span class="open-count-badge font-mono">
-          {{ openCount }}/8 開放中
+          {{ openCount }}/7 開放中
         </span>
       </div>
       <div class="d-flex align-center gap-1">
@@ -151,16 +149,7 @@ function collapseAll() {
       <PurposeEditor />
     </StepAccordionItem>
 
-    <!-- STEP 7: Image Asset Prompt Generator -->
-    <StepAccordionItem
-      :step-number="7"
-      title="外部画像生成AI連携"
-      icon="mdi-image-plus-outline"
-      guide-text="UIの世界観・配色と完全に連動した画像素材（アイコン・キービジュアル等）を、外部画像AIで生成するためのプロンプトを設定します。"
-      v-model="openSteps.step7"
-    >
-      <ImageAssetSettings />
-    </StepAccordionItem>
+
   </div>
 </template>
 
