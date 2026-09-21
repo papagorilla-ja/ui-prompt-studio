@@ -271,25 +271,25 @@ function handleReset() {
 
               <span style="width: 1px; height: 14px; background: rgba(255,255,255,0.15);"></span>
 
-              <!-- Prominent UI Code Prompt Button -->
+              <!-- Prominent UI Code Prompt Button (Emerald Green / AI Image Icon, Issue #42) -->
               <button
                 type="button"
-                class="open-prompt-modal-btn d-flex align-center gap-1 px-3 py-1"
+                class="open-prompt-modal-btn d-flex align-center"
                 title="AIフロントエンド指示プロンプトを表示・コピー"
                 @click="isPromptModalOpen = true"
               >
-                <v-icon icon="mdi-code-tags" size="15" color="primary" />
+                <v-icon icon="mdi-image-sparkles" size="18" color="#6ee7b7" />
                 <span>UI指示書プロンプト</span>
               </button>
 
-              <!-- Prominent Image Prompt Button (Issue #36) -->
+              <!-- Prominent Image Prompt Button (Sunset Amber / AI Image Icon, Issue #42) -->
               <button
                 type="button"
-                class="open-image-modal-btn d-flex align-center gap-1 px-3 py-1"
+                class="open-image-modal-btn d-flex align-center"
                 title="画像アセット生成プロンプト（Nano Banana Pro / Midjourney等）を生成・カスタマイズ"
                 @click="isImageModalOpen = true"
               >
-                <v-icon icon="mdi-image-sparkles" size="15" color="warning" />
+                <v-icon icon="mdi-image-sparkles" size="18" color="#fcd34d" />
                 <span>画像プロンプト生成</span>
               </button>
             </div>
@@ -331,7 +331,7 @@ function handleReset() {
         :class="{ 'mobile-nav-btn-active': isPromptModalOpen }"
         @click="isPromptModalOpen = true"
       >
-        <v-icon icon="mdi-code-tags" size="18" />
+        <v-icon icon="mdi-image-sparkles" size="18" color="#34d399" />
         <span class="mobile-nav-text">UI指示書</span>
       </button>
 
