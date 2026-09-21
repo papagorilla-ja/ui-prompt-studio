@@ -372,45 +372,129 @@ body::after {
   }
 }
 
-/* 7. Open Prompt & Image Modal Trigger Buttons (Issue #35, #36, #42) */
+/* 7. Open Prompt & Image Modal Special Trigger Buttons (Issue #44 AI Assets) */
 .open-prompt-modal-btn {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(5, 150, 105, 0.35) 100%);
-  border: 1px solid rgba(52, 211, 153, 0.7);
-  border-radius: 16px;
+  position: relative;
+  background-image: 
+    linear-gradient(135deg, rgba(6, 78, 59, 0.6) 0%, rgba(4, 120, 87, 0.45) 50%, rgba(16, 185, 129, 0.5) 100%),
+    url(@/assets/images/btn-bg-ui-prompt.jpg);
+  background-size: cover;
+  background-position: center;
+  border: 1.5px solid rgba(52, 211, 153, 0.85);
+  border-radius: 18px;
   color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(16, 185, 129, 0.7);
   cursor: pointer;
-  box-shadow: 0 0 18px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 6px 14px;
-  gap: 6px;
+  box-shadow: 
+    0 0 20px rgba(16, 185, 129, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6px 15px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.open-prompt-modal-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
 }
 
 .open-prompt-modal-btn:hover {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.55) 0%, rgba(5, 150, 105, 0.55) 100%);
-  border-color: rgba(52, 211, 153, 0.95);
-  box-shadow: 0 0 26px rgba(16, 185, 129, 0.7);
-  transform: translateY(-1px);
+  border-color: rgba(52, 211, 153, 1);
+  box-shadow: 
+    0 0 28px rgba(16, 185, 129, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.12);
+}
+
+.open-prompt-modal-btn:hover::before {
+  left: 100%;
 }
 
 .open-image-modal-btn {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.35) 0%, rgba(249, 115, 22, 0.35) 100%);
-  border: 1px solid rgba(249, 115, 22, 0.68);
-  border-radius: 16px;
+  position: relative;
+  background-image: 
+    linear-gradient(135deg, rgba(124, 45, 18, 0.6) 0%, rgba(194, 65, 12, 0.45) 50%, rgba(245, 158, 11, 0.5) 100%),
+    url(@/assets/images/btn-bg-image-prompt.jpg);
+  background-size: cover;
+  background-position: center;
+  border: 1.5px solid rgba(249, 115, 22, 0.85);
+  border-radius: 18px;
   color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(249, 115, 22, 0.7);
   cursor: pointer;
-  box-shadow: 0 0 18px rgba(249, 115, 22, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 6px 14px;
-  gap: 6px;
+  box-shadow: 
+    0 0 20px rgba(249, 115, 22, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6px 15px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.open-image-modal-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
 }
 
 .open-image-modal-btn:hover {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.55) 0%, rgba(249, 115, 22, 0.55) 100%);
-  border-color: rgba(249, 115, 22, 0.95);
-  box-shadow: 0 0 26px rgba(249, 115, 22, 0.7);
-  transform: translateY(-1px);
+  border-color: rgba(249, 115, 22, 1);
+  box-shadow: 
+    0 0 28px rgba(249, 115, 22, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.12);
+}
+
+.open-image-modal-btn:hover::before {
+  left: 100%;
+}
+
+/* AI Generated Icon Styling inside Buttons */
+.special-btn-ai-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  object-fit: cover;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.open-prompt-modal-btn:hover .special-btn-ai-icon,
+.open-image-modal-btn:hover .special-btn-ai-icon {
+  transform: scale(1.12) rotate(4deg);
+}
+
+.mobile-nav-ai-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  object-fit: cover;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
 }

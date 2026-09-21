@@ -10,6 +10,8 @@ import WorkflowGuideBar from '@/components/guidance/WorkflowGuideBar.vue'
 import OnboardingModal from '@/components/guidance/OnboardingModal.vue'
 import StyleManagerModal from '@/components/presets/StyleManagerModal.vue'
 import appLogo from '@/assets/images/logo.jpg'
+import uiPromptIcon from '@/assets/images/btn-icon-ui-prompt.jpg'
+import imagePromptIcon from '@/assets/images/btn-icon-image-prompt.jpg'
 
 const store = useConfigStore()
 
@@ -271,25 +273,25 @@ function handleReset() {
 
               <span style="width: 1px; height: 14px; background: rgba(255,255,255,0.15);"></span>
 
-              <!-- Prominent UI Code Prompt Button (Emerald Green / AI Image Icon, Issue #42) -->
+              <!-- Prominent UI Code Prompt Button (AI-generated background & AI icon, Issue #44) -->
               <button
                 type="button"
                 class="open-prompt-modal-btn d-flex align-center"
                 title="AIフロントエンド指示プロンプトを表示・コピー"
                 @click="isPromptModalOpen = true"
               >
-                <v-icon icon="mdi-image-sparkles" size="18" color="#6ee7b7" />
+                <img :src="uiPromptIcon" class="special-btn-ai-icon" alt="UI" />
                 <span>UI指示書プロンプト</span>
               </button>
 
-              <!-- Prominent Image Prompt Button (Sunset Amber / AI Image Icon, Issue #42) -->
+              <!-- Prominent Image Prompt Button (AI-generated background & AI icon, Issue #44) -->
               <button
                 type="button"
                 class="open-image-modal-btn d-flex align-center"
                 title="画像アセット生成プロンプト（Nano Banana Pro / Midjourney等）を生成・カスタマイズ"
                 @click="isImageModalOpen = true"
               >
-                <v-icon icon="mdi-image-sparkles" size="18" color="#fcd34d" />
+                <img :src="imagePromptIcon" class="special-btn-ai-icon" alt="Image" />
                 <span>画像プロンプト生成</span>
               </button>
             </div>
@@ -331,7 +333,7 @@ function handleReset() {
         :class="{ 'mobile-nav-btn-active': isPromptModalOpen }"
         @click="isPromptModalOpen = true"
       >
-        <v-icon icon="mdi-image-sparkles" size="18" color="#34d399" />
+        <img :src="uiPromptIcon" class="mobile-nav-ai-icon" alt="" />
         <span class="mobile-nav-text">UI指示書</span>
       </button>
 
@@ -341,7 +343,7 @@ function handleReset() {
         :class="{ 'mobile-nav-btn-active': isImageModalOpen }"
         @click="isImageModalOpen = true"
       >
-        <v-icon icon="mdi-image-sparkles" size="18" color="warning" />
+        <img :src="imagePromptIcon" class="mobile-nav-ai-icon" alt="" />
         <span class="mobile-nav-text">画像生成</span>
       </button>
     </nav>
