@@ -246,20 +246,24 @@ function openExternalAI() {
                   v-for="ai in targetAIs"
                   :key="ai.id"
                   type="button"
-                  class="ai-model-card pa-2-5 d-flex align-center justify-space-between text-left cursor-pointer"
+                  class="ai-model-card pa-2-5 d-flex flex-column text-left cursor-pointer"
                   :class="{ 'ai-model-card-active': currentAsset.targetAi === ai.id }"
                   @click="selectTargetAI(ai.id)"
                 >
-                  <div class="d-flex align-center gap-2">
-                    <div class="ai-card-icon-box">
-                      <v-icon :icon="ai.icon" size="18" />
+                  <!-- Top Row: Icon + Label + Tag -->
+                  <div class="d-flex align-center justify-space-between gap-1-5 w-100 mb-1">
+                    <div class="d-flex align-center gap-2 min-w-0 flex-1">
+                      <div class="ai-card-icon-box flex-shrink-0">
+                        <v-icon :icon="ai.icon" size="16" />
+                      </div>
+                      <span class="font-weight-bold text-white text-caption text-truncate">{{ ai.label }}</span>
                     </div>
-                    <div>
-                      <div class="font-weight-bold text-white text-caption">{{ ai.label }}</div>
-                      <div class="text-caption text-grey text-truncate" style="font-size: 0.65rem !important;">{{ ai.sub }}</div>
-                    </div>
+                    <span class="ai-tag font-mono flex-shrink-0">{{ ai.tag }}</span>
                   </div>
-                  <span class="ai-tag font-mono">{{ ai.tag }}</span>
+                  <!-- Bottom Row: Subtitle -->
+                  <div class="text-caption text-grey text-truncate w-100 pl-7" style="font-size: 0.65rem !important;">
+                    {{ ai.sub }}
+                  </div>
                 </button>
               </div>
             </div>
@@ -489,6 +493,8 @@ function openExternalAI() {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   transition: all 0.15s ease;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .ai-model-card:hover {
@@ -502,22 +508,32 @@ function openExternalAI() {
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
 }
 
+.ai-model-card-active .ai-tag {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
 .ai-card-icon-box {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ai-tag {
-  font-size: 0.62rem;
-  padding: 1px 5px;
+  font-size: 0.6rem;
+  padding: 1px 6px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.07);
   color: #cbd5e1;
+  white-space: nowrap;
+  line-height: 1.25;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ratio-card {
