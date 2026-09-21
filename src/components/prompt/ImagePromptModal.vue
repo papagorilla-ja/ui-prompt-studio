@@ -126,12 +126,7 @@ async function handleCopyNegative() {
   }
 }
 
-function openExternalAI() {
-  const currentTarget = targetAIs.find(t => t.id === currentAsset.value.targetAi)
-  if (currentTarget) {
-    window.open(currentTarget.url, '_blank')
-  }
-}
+
 </script>
 
 <template>
@@ -293,34 +288,22 @@ function openExternalAI() {
           <div class="d-flex flex-column gap-3">
             <!-- English Full Prompt Box -->
             <div class="prompt-output-container pa-4 d-flex flex-column flex-1">
-              <div class="d-flex align-center justify-space-between mb-2">
-                <div class="d-flex align-center gap-2">
-                  <v-icon icon="mdi-format-quote-close" size="16" color="warning" />
-                  <span class="text-subtitle-2 font-weight-bold text-white">
-                    生成プロンプト（AI画像生成指示書）
+              <div class="d-flex align-center justify-space-between gap-3 mb-2 flex-nowrap">
+                <div class="d-flex align-center gap-2 min-w-0">
+                  <v-icon icon="mdi-format-quote-close" size="16" color="warning" class="flex-shrink-0" />
+                  <span class="text-subtitle-2 font-weight-bold text-white text-no-wrap">
+                    AI画像生成プロンプト
                   </span>
                 </div>
-                <div class="d-flex align-center gap-2">
-                  <button
-                    type="button"
-                    class="action-copy-btn d-flex align-center gap-1 px-3 py-1"
-                    :class="{ 'action-copy-btn-success': isPromptCopied }"
-                    @click="handleCopyPrompt"
-                  >
-                    <v-icon :icon="isPromptCopied ? 'mdi-check' : 'mdi-content-copy'" size="14" />
-                    <span>{{ isPromptCopied ? 'コピー完了！' : 'プロンプトをコピー' }}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="action-launch-btn d-flex align-center gap-1 px-2-5 py-1"
-                    title="ツールを新規タブで開く"
-                    @click="openExternalAI"
-                  >
-                    <v-icon icon="mdi-open-in-new" size="14" />
-                    <span class="d-none d-sm-inline">ツールを開く</span>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  class="action-copy-btn d-flex align-center gap-1-5 px-3 py-1-5 text-no-wrap flex-shrink-0"
+                  :class="{ 'action-copy-btn-success': isPromptCopied }"
+                  @click="handleCopyPrompt"
+                >
+                  <v-icon :icon="isPromptCopied ? 'mdi-check' : 'mdi-content-copy'" size="14" />
+                  <span>{{ isPromptCopied ? 'コピー完了！' : 'プロンプトをコピー' }}</span>
+                </button>
               </div>
 
               <!-- Main Prompt Code Window -->
@@ -586,6 +569,7 @@ function openExternalAI() {
   color: #ffffff;
   font-size: 0.74rem;
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -598,21 +582,6 @@ function openExternalAI() {
 .action-copy-btn-success {
   background: #10b981 !important;
   border-color: #10b981 !important;
-}
-
-.action-launch-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: #94a3b8;
-  font-size: 0.72rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.action-launch-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
 }
 
 .negative-box {
