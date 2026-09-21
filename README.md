@@ -3,6 +3,10 @@
 > **AIに渡すだけで、理想のフロントエンドUIコードを一発生成する指示書スタジオ**  
 > Claude 3.7 / ChatGPT (GPT-4o) / Cursor / v0 / Gemini などのAIコーディングツールにコピペして使用する、高精度なUIプロンプトジェネレーター。
 
+デモサイト：https://ui-prompt-studio.vercel.app/  
+上記のサイトで実際に使えます
+
+[![Demo on Vercel](https://img.shields.io/badge/Demo-ui--prompt--studio.vercel.app-000000?logo=vercel&logoColor=white)](https://ui-prompt-studio.vercel.app/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Vue 3](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
