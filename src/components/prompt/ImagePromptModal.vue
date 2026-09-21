@@ -70,11 +70,11 @@ const aspectRatios: { ratio: ImageAspectRatio; label: string }[] = [
 ]
 
 const quickSuggestions = [
-  { label: '未来都市のダッシュボード', motif: 'futuristic holographic analytics dashboard with neon glowing graphs and floating telemetry cards' },
-  { label: '親しみやすい配達ロボット', motif: 'friendly delivery robot mascot with soft round edges and cute expressive LED face' },
-  { label: '幾何学アプリアイコン', motif: 'sleek 3D geometric crystal prism app icon with smooth rounded corners' },
-  { label: 'レトロアーケード筐体', motif: 'glowing vintage 80s arcade cabinet terminal with illuminated marquee and coin slot' },
-  { label: 'ミニマルオフィス空間', motif: 'ultra-minimalist sunlit workspace interior with matte concrete surfaces and green potted plant' },
+  { label: '未来都市ダッシュボード', motif: '未来的なホログラフィック分析ダッシュボード、ネオンに光るデータグラフと浮遊するUIカード' },
+  { label: '親しみやすい配達ロボ', motif: '親しみやすいスマート配達ロボットのマスコット、滑らかな曲面ボディと表情豊かなLEDフェイス' },
+  { label: '3D幾何学アプリアイコン', motif: '洗練された3D幾何学クリスタルプリズムのアプリアイコン、滑らかな角丸と美しい光の屈折' },
+  { label: '80sレトロゲーム筐体', motif: 'ネオンが輝く1980年代風のレトロアーケードゲーム筐体端末、発光する画面とコイン投入口' },
+  { label: 'ミニマルオフィス空間', motif: '柔らかな自然光が差し込むミニマルなオフィス空間、マットな質感のデスクと爽やかな観葉植物' },
 ]
 
 const generatedPrompt = computed(() => {
@@ -207,7 +207,7 @@ function openExternalAI() {
                 <label class="control-label">
                   2. テーマ・モチーフ（描きたいもの）
                 </label>
-                <span class="text-caption text-grey font-mono" style="font-size: 0.7rem !important;">日本語または英語で入力</span>
+                <span class="text-caption text-grey font-mono" style="font-size: 0.7rem !important;">日本語で自由に入力可能</span>
               </div>
               <v-textarea
                 :model-value="currentAsset.themeMotif"
@@ -293,7 +293,7 @@ function openExternalAI() {
                 <div class="d-flex align-center gap-2">
                   <v-icon icon="mdi-format-quote-close" size="16" color="warning" />
                   <span class="text-subtitle-2 font-weight-bold text-white">
-                    英語生成プロンプト (English Prompt)
+                    生成プロンプト（AI画像生成指示書）
                   </span>
                 </div>
                 <div class="d-flex align-center gap-2">
